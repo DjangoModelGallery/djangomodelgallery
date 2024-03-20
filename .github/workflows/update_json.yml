@@ -20,7 +20,7 @@ jobs:
       run: python src/scripts/update_json.py # 필요한 파일을 사용하여 원하는 작업 실행
 
     - name: Copy artifact to repository
-      run: cp example.md $GITHUB_WORKSPACE
+      run: echo $GITHUB_WORKSPACE
       
     - name: Commit artifact
       run: |
