@@ -1,0 +1,15 @@
+name: Update JSON from Markdown
+
+on:
+  push:
+    paths:
+      - '**.md' # Markdown 파일이 변경될 때만 실행
+
+jobs:
+  update_json:
+    name: Update JSON
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Python script
+        run: python src/scripts/update_json.py

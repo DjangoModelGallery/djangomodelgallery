@@ -1,0 +1,82 @@
+[
+    {
+        "id": "001",
+        "title": "Django Blog Post Model",
+        "date": "2023-06-01",
+        "category": "Blog",
+        "modelCount": 1,
+        "tags": ["Django", "Model", "Blog", "Post"],
+        "fileName": "001_django-blog-post-model.md",
+        "contributor": {
+            "name": "John Doe",
+            "social": {
+                "github": "https://github.com/johndoe",
+                "twitter": "https://twitter.com/johndoe"
+            }
+        }
+    },
+    {
+        "id": "002",
+        "title": "Django Shopping Mall Product Model",
+        "date": "2023-06-02",
+        "category": "Shopping Mall",
+        "modelCount": 1,
+        "tags": ["Django", "Model", "Shopping Mall", "Product"],
+        "fileName": "002_django-shopping-mall-product-model.md",
+        "contributor": {
+            "name": "Jane Smith",
+            "social": {
+                "github": "https://github.com/janesmith",
+                "twitter": "https://twitter.com/janesmith"
+            }
+        }
+    },
+    {
+        "id": "003",
+        "title": "Django Custom User Model",
+        "date": "2023-06-03",
+        "category": "Authentication",
+        "modelCount": 1,
+        "tags": ["Django", "Model", "User", "Authentication"],
+        "fileName": "003_django-custom-user-model.md",
+        "contributor": {
+            "name": "Mike Johnson",
+            "social": {
+                "github": "https://github.com/mikejohnson",
+                "twitter": "https://twitter.com/mikejohnson"
+            }
+        }
+    },
+    {
+        "id": "004",
+        "title": "Django Comment Model",
+        "date": "2023-06-04",
+        "category": "Blog",
+        "modelCount": 1,
+        "tags": ["Django", "Model", "Blog", "Comment"],
+        "fileName": "004_django-comment-model.md",
+        "contributor": {
+            "name": "Sarah Lee",
+            "social": {
+                "github": "https://github.com/sarahlee",
+                "twitter": "https://twitter.com/sarahlee"
+            }
+        }
+    },
+    {
+        "id": "005",
+        "title": "Django Tagging Model",
+        "date": "2023-06-05",
+        "category": "Blog",
+        "modelCount": 1,
+        "tags": ["Django", "Model", "Tagging", "Blog"],
+        "fileName": "005_django-tagging-model.md",
+        "contributor": {
+            "name": "David Kim",
+            "social": {
+                "github": "https://github.com/davidkim",
+                "twitter": "https://twitter.com/davidkim"
+            }
+        }
+    }
+]
