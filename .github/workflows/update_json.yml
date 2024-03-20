@@ -17,4 +17,4 @@ jobs:
       # - name: Run Python script
       #   run: python /djangomodelgallery/src/scripts/update_json.py
       - name: Print current directory
-        run: find / -name update_json.py
+        run: find / -type f -name "update_json.py" 2>/dev/null
