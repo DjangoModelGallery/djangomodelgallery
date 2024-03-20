@@ -1,7 +1,4 @@
-name: Update JSON from Markdown
-
-
-
+name: Use repository files in GitHub Actions
 
 on:
   push:
@@ -9,12 +6,16 @@ on:
       - '**.md' # Markdown 파일이 변경될 때만 실행
 
 jobs:
-  update_json:
-    name: Updat
+  upload-and-run:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Run Python script
-      #   run: python /djangomodelgallery/src/scripts/update_json.py
-      - name: Print current directory
-        run: ls | ls ..
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: List files
+      run: ls
+      
+    - name: Run Python script from repository
+      run: python src/scripts/update_json.py # 필요한 파일을 사용하여 원하는 작업 실행
+
