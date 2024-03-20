@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Run Python script
-        run: python src/scripts/update_json.py
+        run: python ./src/scripts/update_json.py
