@@ -4,7 +4,6 @@ export default class SVGHandler {
     this.mermaidCode = mermaidCode;
   }
 
-  // D3.js 라이브러리 로드
   loadD3Library() {
     return new Promise((resolve, reject) => {
       if (!window.d3) {
@@ -32,12 +31,16 @@ export default class SVGHandler {
       await this.loadD3Library();
       console.log("Initializing zoom and pan features...");
       const svgElement = d3.select(this.selector + " svg");
+
       if (!svgElement.node()) {
-        console.error(
-          "SVG element not found with the selector: " + this.selector + " svg"
+        console.warn(
+          "SVG element not found with the selector: " +
+            this.selector +
+            " svg. Skipping zoom and pan initialization."
         );
         return;
       }
+
       console.log("SVG element selected:", svgElement.node());
 
       const container = d3.select(this.selector);

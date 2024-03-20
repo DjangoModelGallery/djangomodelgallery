@@ -1,7 +1,9 @@
 import CodeMirrorEditor from "../service/CodeMirrorEditor.js";
 import MermaidLoader from "../service/MermaidLoader.js";
+import SVGConverter from "../service/SVGConverter.js";
 import SVGHandler from "../service/SVGHandler.js";
-import { isValidMermaidCode } from "../util/isValidCods.js";
+import { extractH1 } from "../util/extracts.js";
+import { isValidMermaidCode } from "../util/isValidCodes.js";
 import { parseMarkdown } from "../util/markdownParser.js";
 import { throttle } from "../util/throttle.js";
 
@@ -32,6 +34,9 @@ export async function createPostDetailView(fileName) {
 
 function createPostDetailElement(htmlContent, mermaidCodeBlocks) {
   const postDetailSection = document.createElement("section");
+  const h1Text = extractH1(htmlContent);
+  console.log("🚀 ~ createPostDetailElement ~ h1Text:", h1Text);
+
   postDetailSection.innerHTML = `
         <article class="prose">${htmlContent}</article>
         <div class="mermaid-code-editor-container"></div> 
@@ -40,6 +45,8 @@ function createPostDetailElement(htmlContent, mermaidCodeBlocks) {
         {mermaidCodeBlocks}
         </div>
         <button id="resetZoom">Reset Zoom</button>
+        <button id="downloadSVG" data-format="svg">Download SVG</button>
+   
     `;
 
   const editor = new CodeMirrorEditor(".language-mermaid", mermaidCodeBlocks);
@@ -70,6 +77,13 @@ function createPostDetailElement(htmlContent, mermaidCodeBlocks) {
     .then(() => {
       const svgHandler = new SVGHandler(".mermaid", mermaidCodeBlocks);
       svgHandler.initializeZoomAndPan();
+
+      const svgConverter = new SVGConverter(
+        ".mermaid",
+        h1Text,
+        "DjangoModelGallery"
+      );
+      svgConverter.attachEventListeners();
     })
     .catch((error) => {
       console.error("Failed to load or render Mermaid SVG:", error);
