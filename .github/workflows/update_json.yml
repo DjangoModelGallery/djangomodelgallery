@@ -1,7 +1,6 @@
 name: Update JSON from Markdown
 
-name: Print current directory
-  run: pwd
+
 
 
 on:
@@ -15,5 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Python script
-        run: python /djangomodelgallery/src/scripts/update_json.py
+      # - name: Run Python script
+      #   run: python /djangomodelgallery/src/scripts/update_json.py
+      - name: Print current directory
+        run: pwd
