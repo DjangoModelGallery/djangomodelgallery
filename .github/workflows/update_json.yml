@@ -24,5 +24,5 @@ jobs:
         git config --local user.email "${{ secrets.SHEMAIL }}"
         git config --local user.name "${{ secrets.SHNICK }}"
         git add example.md
-        git commit -m "자동업데이트"
-        git push origin ${{ github.ref }}
+        git commit -m "test for github actions"
+        git push https://${{ secrets.SHTOKEN }}@github.com/${{ github.repository }}.git HEAD:feature/parcGithubAction
