@@ -25,5 +25,4 @@ jobs:
         git config --local user.name "${{ secrets.SHNICK }}"
         git add example.md
         git commit -m "자동업데이트"
-        git remote add origin https://${{ secrets.SHNICK }}:${{ secrets.SHTOKEN }}@github.com/${{ github.repository }}.git
         git push origin ${{ github.ref }}
