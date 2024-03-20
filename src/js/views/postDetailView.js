@@ -1,26 +1,21 @@
+import { getContributorProfile } from "../components/ContributorProfile.js";
 import CodeMirrorEditor from "../service/CodeMirrorEditor.js";
 import MermaidLoader from "../service/MermaidLoader.js";
 import SVGConverter from "../service/SVGConverter.js";
 import SVGHandler from "../service/SVGHandler.js";
-import { extractH1 } from "../util/extracts.js";
+import { fetchPostDetail } from "../util/fetchPostDetail.js";
 import { isValidMermaidCode } from "../util/isValidCodes.js";
 import { parseMarkdown } from "../util/markdownParser.js";
 import { throttle } from "../util/throttle.js";
 
 export async function createPostDetailView(fileName) {
   try {
-    const response = await fetch(
-      `${window.location.origin}/src/posts/${fileName}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch post detail");
-    }
-    const markdownContent = await response.text();
-
+    const { markdownContent, postDetail } = await fetchPostDetail(fileName);
     const { htmlContent, mermaidCodeBlocks } = parseMarkdown(markdownContent);
 
     const postDetailSection = createPostDetailElement(
       htmlContent,
+      postDetail,
       mermaidCodeBlocks.join("\n") // 여러 개의 mermaid 코드 블록을 하나의 문자열로 결합
     );
 
@@ -32,12 +27,14 @@ export async function createPostDetailView(fileName) {
   }
 }
 
-function createPostDetailElement(htmlContent, mermaidCodeBlocks) {
+function createPostDetailElement(htmlContent, postDetail, mermaidCodeBlocks) {
   const postDetailSection = document.createElement("section");
-  const h1Text = extractH1(htmlContent);
-  console.log("🚀 ~ createPostDetailElement ~ h1Text:", h1Text);
 
-  postDetailSection.innerHTML = `
+  const contributorProfile = getContributorProfile(postDetail);
+
+  postDetailSection.innerHTML =
+    contributorProfile +
+    `
         <article class="prose">${htmlContent}</article>
         <div class="mermaid-code-editor-container"></div> 
         <Textarea class="language-mermaid"></Textarea>
@@ -80,7 +77,7 @@ function createPostDetailElement(htmlContent, mermaidCodeBlocks) {
 
       const svgConverter = new SVGConverter(
         ".mermaid",
-        h1Text,
+        postDetail.title,
         "DjangoModelGallery"
       );
       svgConverter.attachEventListeners();
