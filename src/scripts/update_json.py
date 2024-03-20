@@ -2,6 +2,7 @@ import json
 
 def update_json(markdown_file, json_file):
     f = open(markdown_file, "w")
+    f.write("hello")
     f.close()
     # # Markdown 파일을 읽어옴
     # with open(markdown_file, 'r', encoding='utf-8') as f:
