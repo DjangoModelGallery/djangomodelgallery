@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Run Python script
-        run: python ${{ github.workspace }}/src/scripts/update_json.py
+        run: python tree/feature/pracGithubAction/src/scripts/update_json.py
