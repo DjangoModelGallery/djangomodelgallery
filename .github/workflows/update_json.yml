@@ -19,13 +19,10 @@ jobs:
     - name: Run Python script from repository
       run: python src/scripts/update_json.py # 필요한 파일을 사용하여 원하는 작업 실행
 
-    - name: Copy artifact to repository
-      run: echo $GITHUB_WORKSPACE
-      
     - name: Commit artifact
       run: |
         git config --local user.email "${{ secrets.SHEMAIL }}"
         git config --local user.name "${{ secrets.SHNICK }}"
         git add example.md
         git commit -m "자동업데이트"
-        git push
+        git push https://${{ secrets.SHTOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
