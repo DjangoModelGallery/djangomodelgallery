@@ -1,8 +1,7 @@
 name: Update JSON from Markdown
 
 name: Print current directory
-  run: |
-    pwd
+  run: pwd
 
 
 on:
