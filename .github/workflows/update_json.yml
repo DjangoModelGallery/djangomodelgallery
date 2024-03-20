@@ -24,8 +24,8 @@ jobs:
       
     - name: Commit artifact
       run: |
-        git config --local user.email "sh.han@yoil.co.kr"
-        git config --local user.name "jejuHyeop"
+        git config --local user.email "${{ secrets.SHEMAIL }}"
+        git config --local user.name "${{ secrets.SHNICK }}"
         git add example.md
         git commit -m "자동업데이트"
         git push
