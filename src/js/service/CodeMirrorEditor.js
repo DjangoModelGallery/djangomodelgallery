@@ -1,5 +1,3 @@
-// service > CodeMirrorEditor.js
-
 import { mermaidMode } from "../lib/codemirror/mermaidMode.js";
 
 export default class CodeMirrorEditor {
@@ -16,7 +14,6 @@ export default class CodeMirrorEditor {
         "https://cdn.jsdelivr.net/npm/codemirror@5.63.3/lib/codemirror.min.css";
       document.head.appendChild(link);
 
-      // 추가적인 스타일시트 로드
       const themeLink = document.createElement("link");
       themeLink.rel = "stylesheet";
       themeLink.href =
@@ -27,7 +24,6 @@ export default class CodeMirrorEditor {
       script.src =
         "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.js";
       script.onload = () => {
-        // 추가적인 스크립트 로드
         mermaidMode(CodeMirror);
         const markdownScript = document.createElement("script");
         markdownScript.src =
@@ -60,6 +56,25 @@ export default class CodeMirrorEditor {
           theme: "dracula",
         });
         this.setValue(this.initialValue);
+
+        // 최소 너비 설정
+        this.editor.getWrapperElement().style.minWidth = "50%";
+        this.editor.getWrapperElement().style.width = "100%";
+        this.editor
+          .getWrapperElement()
+          .classList.add(
+            "min-h-screen",
+            "h-auto",
+            "sticky",
+            "top-0",
+            "z-10",
+            "bg-white",
+            "p-4",
+            "border",
+            "border-gray-300",
+            "shadow-lg",
+            "hidden-scrollbar"
+          );
       } else {
         console.error("Textarea for CodeMirror not found:", this.selector);
       }

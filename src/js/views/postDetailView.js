@@ -35,15 +35,17 @@ function createPostDetailElement(htmlContent, postDetail, mermaidCodeBlocks) {
   postDetailSection.innerHTML =
     contributorProfile +
     `
-        <article class="prose">${htmlContent}</article>
-        <div class="mermaid-code-editor-container"></div> 
+    <section class="flex relative ">
+        <article class="prose w-full min-w-1/2 px-6 pt-10">${htmlContent}</article>
         <Textarea class="language-mermaid"></Textarea>
         <div class="mermaid w-full flex justify-center ">
         {mermaidCodeBlocks}
+
+      
         </div>
-        <button id="resetZoom">Reset Zoom</button>
-        <button id="downloadSVG" data-format="svg">Download SVG</button>
-   
+        <button class="absolute right-10 " id="resetZoom">Reset Zoom</button>
+        <button class="absolute right-10 top-10" id="downloadSVG" data-format="svg">Download SVG</button>
+   </section>
     `;
 
   const editor = new CodeMirrorEditor(".language-mermaid", mermaidCodeBlocks);
