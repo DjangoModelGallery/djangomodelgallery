@@ -1,0 +1,17 @@
+/* Chrome, Safari, Opera 등의 Webkit 브라우저용 */
+body ::-webkit-scrollbar,
+.CodeMirror-scroll::-webkit-scrollbar {
+  display: none; /* 스크롤바를 숨깁니다 */
+}
+
+/* Firefox 브라우저용 */
+body,
+.CodeMirror-scroll {
+  scrollbar-width: none; /* 스크롤바를 숨깁니다 */
+}
+
+/* IE 10+ 및 Edge 브라우저용 */
+body,
+.CodeMirror-scroll {
+  -ms-overflow-style: none; /* 스크롤바를 숨깁니다 */
+}
