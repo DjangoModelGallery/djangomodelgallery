@@ -1,15 +1,25 @@
-// utils/markdownParser.js
-
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
-/**
- * Markdown 문자열을 파싱하여 HTML과 mermaid 코드 블록을 반환합니다.
- * @param {string} markdownContent 마크다운 형식의 문자열
- * @return {object} HTML 문자열과 mermaid 코드 블록 배열을 포함한 객체
- */
 export function parseMarkdown(markdownContent) {
-  const mermaidCodeBlocks = [];
+  // 프론트매터 추출을 위한 정규식 수정: 시작과 끝을 명확히 구분
+  const frontMatterRegex = /^---\s*\n([\s\S]+?)\n---/;
+  let frontMatter = {};
+  let contentWithoutFrontMatter = markdownContent;
 
+  const frontMatterMatch = markdownContent.match(frontMatterRegex);
+  if (frontMatterMatch) {
+    const frontMatterString = frontMatterMatch[1]; // 첫 번째 캡처 그룹에 해당하는 실제 프론트매터 내용
+    contentWithoutFrontMatter = markdownContent
+      .replace(frontMatterMatch[0], "")
+      .trim();
+
+    frontMatterString.split("\n").forEach((line) => {
+      const [key, value] = line.split(":").map((part) => part.trim());
+      frontMatter[key] = value;
+    });
+  }
+
+  const mermaidCodeBlocks = [];
   marked.use({
     renderer: {
       code(code, infostring) {
@@ -22,10 +32,10 @@ export function parseMarkdown(markdownContent) {
     },
   });
 
-  const htmlContent = marked.parse(markdownContent);
-
+  const htmlContent = marked.parse(contentWithoutFrontMatter);
   return {
     htmlContent,
     mermaidCodeBlocks,
+    frontMatter,
   };
 }
