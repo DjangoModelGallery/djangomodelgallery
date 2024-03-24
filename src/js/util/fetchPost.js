@@ -23,7 +23,7 @@ export async function fetchPosts() {
   const filterCategory = params.get("category") || "";
 
   const response = await fetch(
-    `${window.location.origin}/src/postsList/postsList.json`
+    `${window.location.origin}/src/postsList/postsList.json`,
   );
   if (!response.ok) {
     throw new Error("데이터를 가져오는데 실패했습니다.");
@@ -36,8 +36,8 @@ export async function fetchPosts() {
       (post) =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.tags.some((tag) =>
-          tag.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+          tag.toLowerCase().includes(searchQuery.toLowerCase()),
+        ),
     );
   }
 

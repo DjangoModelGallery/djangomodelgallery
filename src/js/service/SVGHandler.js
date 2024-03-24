@@ -36,7 +36,7 @@ export default class SVGHandler {
         console.warn(
           "SVG element not found with the selector: " +
             this.selector +
-            " svg. Skipping zoom and pan initialization."
+            " svg. Skipping zoom and pan initialization.",
         );
         return;
       }
@@ -67,7 +67,7 @@ export default class SVGHandler {
     } catch (error) {
       console.error(
         "An error occurred while initializing zoom and pan features:",
-        error
+        error,
       );
     }
   }

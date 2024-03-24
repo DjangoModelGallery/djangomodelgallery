@@ -16,7 +16,7 @@ export async function createPostDetailView(fileName) {
     const postDetailSection = createPostDetailElement(
       htmlContent,
       postDetail,
-      mermaidCodeBlocks.join("\n") // 여러 개의 mermaid 코드 블록을 하나의 문자열로 결합
+      mermaidCodeBlocks.join("\n"), // 여러 개의 mermaid 코드 블록을 하나의 문자열로 결합
     );
 
     postDetailSection.mermaidCodeBlocks = mermaidCodeBlocks;
@@ -66,7 +66,7 @@ function createPostDetailElement(htmlContent, postDetail, mermaidCodeBlocks) {
           // console.error("Mermaid code error:", errorMessage);
           // 사용자에게 오류 메시지를 표시하는 로직을 여기에 추가할 수 있습니다.
         }
-      }, 1000)
+      }, 1000),
     );
   });
 
@@ -80,7 +80,7 @@ function createPostDetailElement(htmlContent, postDetail, mermaidCodeBlocks) {
       const svgConverter = new SVGConverter(
         ".mermaid",
         postDetail.title,
-        "DjangoModelGallery"
+        "DjangoModelGallery",
       );
       svgConverter.attachEventListeners();
     })

@@ -73,7 +73,7 @@ export default class CodeMirrorEditor {
             "border",
             "border-gray-300",
             "shadow-lg",
-            "hidden-scrollbar"
+            "hidden-scrollbar",
           );
       } else {
         console.error("Textarea for CodeMirror not found:", this.selector);

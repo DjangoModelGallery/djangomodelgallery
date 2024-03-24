@@ -3,7 +3,7 @@ export default class SVGConverter {
     selector = "mermaid",
     h1Text = "Mermaid Diagram", // SVG 파일의 제목
     watermarkText = "Watermark", // 워터마크 텍스트
-    watermarkImageUrl = null // 워터마크 이미지 URL (옵션)
+    watermarkImageUrl = null, // 워터마크 이미지 URL (옵션)
   ) {
     this.selector = selector;
     this.h1Text = h1Text;
@@ -58,7 +58,7 @@ export default class SVGConverter {
       imageElement.setAttributeNS(
         "http://www.w3.org/1999/xlink",
         "href",
-        this.watermarkImageUrl
+        this.watermarkImageUrl,
       );
       imageElement.setAttribute("x", "0"); // 좌측 끝으로 변경
       imageElement.setAttribute("y", svgHeight - 50); // 이미지의 높이만큼 위로 올림
@@ -71,11 +71,13 @@ export default class SVGConverter {
   convertAndDownload(svgElement) {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${String(
-      today.getMonth() + 1
+      today.getMonth() + 1,
     ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
     this.downloadSVG(
       svgElement,
-      `${this.h1Text ? this.h1Text : "DjangoModelGallery"}-${formattedDate}.svg`
+      `${
+        this.h1Text ? this.h1Text : "DjangoModelGallery"
+      }-${formattedDate}.svg`,
     );
   }
 

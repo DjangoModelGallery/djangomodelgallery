@@ -16,7 +16,7 @@ async function renderPostDetail(fileName) {
       mainElement.appendChild(postDetailView);
     } else {
       console.error(
-        `Failed to render post detail for post fileName: ${fileName}`
+        `Failed to render post detail for post fileName: ${fileName}`,
       );
     }
   } catch (error) {
@@ -47,7 +47,7 @@ async function renderMainContent() {
   } catch (error) {
     console.error(
       "데이터를 가져오는데 실패했습니다. 애러명을 확인해주세요.",
-      error
+      error,
     );
     main.innerHTML =
       "<p>데이터를 가져오는데 실패했습니다. console에 찍힌 애러명을 확인해주세요.</p>";
