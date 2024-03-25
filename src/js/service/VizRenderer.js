@@ -26,6 +26,11 @@ export default class VizRenderer {
    * @returns {Promise<string>} SVG 문자열
    */
   async renderSVG(dotString, options = {}) {
+    if (!dotString || typeof dotString !== "string") {
+      console.error("Invalid DOT string provided.");
+      return this.lastSuccessfulSVG || "";
+    }
+
     try {
       const svgString = await this.viz.renderString(dotString, {
         format: "svg",
@@ -35,10 +40,7 @@ export default class VizRenderer {
       return svgString;
     } catch (error) {
       console.error("Error rendering SVG:", error);
-      if (this.lastSuccessfulSVG) {
-        return this.lastSuccessfulSVG;
-      }
-      throw error;
+      return this.lastSuccessfulSVG || "";
     }
   }
 
@@ -49,6 +51,11 @@ export default class VizRenderer {
    * @returns {Promise<HTMLImageElement>} 이미지 요소
    */
   async renderImageElement(dotString, options = {}) {
+    if (!dotString || typeof dotString !== "string") {
+      console.error("Invalid DOT string provided.");
+      return this.lastSuccessfulImageElement || null;
+    }
+
     try {
       const imageElement = await this.viz.renderImageElement(
         dotString,
@@ -58,10 +65,7 @@ export default class VizRenderer {
       return imageElement;
     } catch (error) {
       console.error("Error rendering image element:", error);
-      if (this.lastSuccessfulImageElement) {
-        return this.lastSuccessfulImageElement;
-      }
-      throw error;
+      return this.lastSuccessfulImageElement || null;
     }
   }
 
@@ -72,16 +76,18 @@ export default class VizRenderer {
    * @returns {Promise<object>} JSON 객체
    */
   async renderJSONObject(dotString, options = {}) {
+    if (!dotString || typeof dotString !== "string") {
+      console.error("Invalid DOT string provided.");
+      return this.lastSuccessfulJSON || null;
+    }
+
     try {
       const jsonObject = await this.viz.renderJSONObject(dotString, options);
       this.lastSuccessfulJSON = jsonObject;
       return jsonObject;
     } catch (error) {
       console.error("Error rendering JSON object:", error);
-      if (this.lastSuccessfulJSON) {
-        return this.lastSuccessfulJSON;
-      }
-      throw error;
+      return this.lastSuccessfulJSON || null;
     }
   }
 }
