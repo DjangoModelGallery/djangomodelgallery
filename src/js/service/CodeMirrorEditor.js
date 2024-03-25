@@ -56,25 +56,6 @@ export default class CodeMirrorEditor {
           theme: "dracula",
         });
         this.setValue(this.initialValue);
-
-        // 최소 너비 설정
-        this.editor.getWrapperElement().style.minWidth = "50%";
-        this.editor.getWrapperElement().style.width = "100%";
-        this.editor
-          .getWrapperElement()
-          .classList.add(
-            "min-h-screen",
-            "h-auto",
-            "sticky",
-            "top-0",
-            "z-10",
-            "bg-white",
-            "p-4",
-            "border",
-            "border-gray-300",
-            "shadow-lg",
-            "hidden-scrollbar",
-          );
       } else {
         console.error("Textarea for CodeMirror not found:", this.selector);
       }
