@@ -66,6 +66,7 @@ class Comment(models.Model):
 
 ```
 
+<!--
 ```mermaid
 classDiagram
     class Blog_Post {
@@ -84,7 +85,7 @@ classDiagram
     }
     Blog_Post "1" -- "*" Blog_Comment : contains
 
-```
+``` -->
 
 ```viz
 digraph AppSchema {

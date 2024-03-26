@@ -45,21 +45,29 @@ async function createPostDetailElement(
     contributorProfile +
     `
  
-    <section class="flex relative w-full">
-      <article class="prose prose-2xl mx-auto w-full px-6 pt-10">${htmlContent}</article>
-      <div class="viz-placeholder"></div>
-    
-      
-    </section>
-    <Textarea class="language-viz"></Textarea>
-    <section class="mermaid">
+    <section class="flex flex-col md:flex-row w-full h-lvh items-center justify-center">
+      <article class="prose 2xl:prose-xl w-full md:w-1/2 h-full overflow-y-auto px-10 pt-5">${htmlContent}</article>
 
+
+      <div class="flex flex-col relative">
+    
+      <div class="django-container w-full">
+     
+    
+      </div>
+
+      <div class="viz-image-holder"></div>
+      </div>
+    </section>
+   
+   
+    <section class="mermaid">
+    <Textarea class="language-viz"></Textarea>
         ${mermaidCodeBlocks} <button class="absolute right-10" id="resetZoom">Reset Zoom</button>
         <button class="absolute right-10 top-10" id="downloadSVG" data-format="svg">Download SVG</button>
       </section>
 
-      <div class="django-container">
-      </div>
+  
  
   `;
 
@@ -69,7 +77,7 @@ async function createPostDetailElement(
     scale: 2,
   });
 
-  const ERDBlock = postDetailSection.querySelector(".viz-placeholder");
+  const ERDBlock = postDetailSection.querySelector(".viz-image-holder");
   ERDBlock.innerHTML = svgString;
 
   const models = new DjangoCodeBlocksEditor(
@@ -92,7 +100,7 @@ async function createPostDetailElement(
           const svgString = await vizRenderer.renderSVG(currentValue, {
             scale: 2,
           });
-          document.querySelector(".viz-placeholder").innerHTML = svgString;
+          document.querySelector(".viz-image-holder").innerHTML = svgString;
         } catch (error) {
           console.error("Viz rendering error:", error);
         }
