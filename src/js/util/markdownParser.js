@@ -5,7 +5,7 @@ import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
  * 프론트매터는 YAML 형식으로 마크다운 최상단에 위치해 있으며, '---'로 구분됩니다.
  *
  * @param {string} markdownContent 마크다운 형식의 문자열.
- * @return {object} HTML 문자열, mermaid 코드 블록 배열, ERD 코드 블록 배열, 프론트매터 데이터를 포함한 객체.
+ * @return {object} HTML 문자열, mermaid 코드 블록 배열, ERD 코드 블록 배열, Django 코드 블록 배열, 프론트매터 데이터를 포함한 객체.
  */
 export function parseMarkdown(markdownContent) {
   const frontMatterRegex = /^---\s*\n([\s\S]+?)\n---/;
@@ -25,19 +25,28 @@ export function parseMarkdown(markdownContent) {
     });
   }
 
-  const mermaidCodeBlocks = [];
-  const vizCodeBlocks = [];
+  const codeBlocks = {
+    mermaid: [],
+    viz: [],
+    django: [],
+  };
 
   marked.use({
     renderer: {
       code(code, infostring) {
         if (infostring === "mermaid") {
-          mermaidCodeBlocks.push(code);
+          codeBlocks.mermaid.push(code);
           return '<div class="mermaid-placeholder"></div>';
         }
         if (infostring === "viz") {
-          vizCodeBlocks.push(code);
+          codeBlocks.viz.push(code);
           return '<div class="viz-placeholder"></div>';
+        }
+        if (infostring.startsWith("python")) {
+          const lines = code.split("\n");
+          const djangoCodeName = lines[0].trim().replace(/^#\s*/, "");
+          const djangoCode = lines.slice(1).join("\n");
+          codeBlocks.django.push({ name: djangoCodeName, code: djangoCode });
         }
         return `<pre><code class="${infostring}">${code}</code></pre>`;
       },
@@ -47,8 +56,9 @@ export function parseMarkdown(markdownContent) {
   const htmlContent = marked.parse(contentWithoutFrontMatter);
   return {
     htmlContent,
-    mermaidCodeBlocks,
-    vizCodeBlocks,
+    mermaidCodeBlocks: codeBlocks.mermaid,
+    vizCodeBlocks: codeBlocks.viz,
+    djangoCodeBlocks: codeBlocks.django,
     frontMatter,
   };
 }
