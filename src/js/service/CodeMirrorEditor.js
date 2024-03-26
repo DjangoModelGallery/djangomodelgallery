@@ -1,11 +1,13 @@
 import { mermaidMode } from "../lib/codemirror/mermaidMode.js";
 
 export default class CodeMirrorEditor {
-  constructor(selector, initialValue = "") {
+  constructor(selector, initialValue = "", readOnly = false) {
     this.selector = selector;
     this.initialValue = initialValue;
     this.editor = null;
+    this.readOnly = readOnly;
   }
+
   async loadCodeMirror() {
     return new Promise((resolve, reject) => {
       const link = document.createElement("link");
@@ -25,18 +27,29 @@ export default class CodeMirrorEditor {
         "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.js";
       script.onload = () => {
         mermaidMode(CodeMirror);
-        const markdownScript = document.createElement("script");
-        markdownScript.src =
-          "https://cdn.jsdelivr.net/npm/codemirror@5.63.3/mode/markdown/markdown.min.js";
-        markdownScript.onload = () => {
-          console.log("CodeMirror loaded");
-          resolve();
+
+        const pythonScript = document.createElement("script");
+        pythonScript.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js";
+        pythonScript.onload = () => {
+          const markdownScript = document.createElement("script");
+          markdownScript.src =
+            "https://cdn.jsdelivr.net/npm/codemirror@5.63.3/mode/markdown/markdown.min.js";
+          markdownScript.onload = () => {
+            console.log("CodeMirror loaded");
+            resolve();
+          };
+          markdownScript.onerror = (e) => {
+            console.error("Error loading CodeMirror markdown mode:", e);
+            reject(e);
+          };
+          document.body.appendChild(markdownScript);
         };
-        markdownScript.onerror = (e) => {
-          console.error("Error loading CodeMirror markdown mode:", e);
+        pythonScript.onerror = (e) => {
+          console.error("Error loading CodeMirror python mode:", e);
           reject(e);
         };
-        document.body.appendChild(markdownScript);
+        document.body.appendChild(pythonScript);
       };
       script.onerror = (e) => {
         console.error("Error loading CodeMirror:", e);
@@ -45,6 +58,7 @@ export default class CodeMirrorEditor {
       document.body.appendChild(script);
     });
   }
+
   async initialize() {
     try {
       await this.loadCodeMirror();

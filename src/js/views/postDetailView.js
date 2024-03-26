@@ -1,5 +1,6 @@
 import { getContributorProfile } from "../components/ContributorProfile.js";
 import CodeMirrorEditor from "../service/CodeMirrorEditor.js";
+import DjangoCodeBlocksEditor from "../service/DjangoCodeBlocksEditor.js";
 import VizRenderer from "../service/VizRenderer.js";
 import { fetchPostDetail } from "../util/fetchPostDetail.js";
 import { parseMarkdown } from "../util/markdownParser.js";
@@ -8,14 +9,18 @@ import { throttle } from "../util/throttle.js";
 export async function createPostDetailView(fileName) {
   try {
     const { markdownContent, postDetail } = await fetchPostDetail(fileName);
-    const { htmlContent, mermaidCodeBlocks, vizCodeBlocks } =
+    const { htmlContent, mermaidCodeBlocks, vizCodeBlocks, djangoCodeBlocks } =
       parseMarkdown(markdownContent);
-
+    console.log(
+      "🚀 ~ createPostDetailView ~ djangoCodeBlocks:",
+      djangoCodeBlocks,
+    );
     const postDetailSection = createPostDetailElement(
       htmlContent,
       postDetail,
       mermaidCodeBlocks.join("\n"),
       vizCodeBlocks,
+      djangoCodeBlocks,
     );
     postDetailSection.mermaidCodeBlocks = mermaidCodeBlocks;
 
@@ -31,6 +36,7 @@ async function createPostDetailElement(
   postDetail,
   mermaidCodeBlocks,
   vizCodeBlocks,
+  djangoCodeBlocks,
 ) {
   const postDetailSection = document.createElement("section");
   const contributorProfile = getContributorProfile(postDetail);
@@ -51,6 +57,9 @@ async function createPostDetailElement(
         ${mermaidCodeBlocks} <button class="absolute right-10" id="resetZoom">Reset Zoom</button>
         <button class="absolute right-10 top-10" id="downloadSVG" data-format="svg">Download SVG</button>
       </section>
+
+      <div class="django-container">
+      </div>
  
   `;
 
@@ -62,6 +71,13 @@ async function createPostDetailElement(
 
   const ERDBlock = postDetailSection.querySelector(".viz-placeholder");
   ERDBlock.innerHTML = svgString;
+
+  const models = new DjangoCodeBlocksEditor(
+    ".django-container",
+    djangoCodeBlocks,
+    true,
+  );
+  models.initialize();
 
   const editor = new CodeMirrorEditor(".language-viz", vizCodeBlocks[0]);
   editor.initialize().then(() => {
