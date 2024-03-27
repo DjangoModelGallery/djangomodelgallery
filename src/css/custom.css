@@ -1,4 +1,8 @@
 /* Chrome, Safari, Opera 등의 Webkit 브라우저용 */
+body.dark {
+  background-color: #1f2937;
+}
+
 body::-webkit-scrollbar,
 .CodeMirror-scroll::-webkit-scrollbar {
   width: 10px;
@@ -46,13 +50,13 @@ body {
 .tab-button {
   padding: 5px 10px;
   margin-right: 5px;
-  background-color: #f1f1f1;
+  background-color: #888;
   border: none;
   cursor: pointer;
 }
 
 .tab-button.active {
-  background-color: #ccc;
+  background-color: #5e5e5e;
 }
 
 .editor-container {
