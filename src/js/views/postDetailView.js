@@ -46,7 +46,7 @@ async function createPostDetailElement(
     `
  
     <section class="flex flex-col md:flex-row w-full h-lvh items-center justify-center">
-      <article class="prose 2xl:prose-xl w-full md:w-1/2 h-full overflow-y-auto px-10 pt-5">${htmlContent}</article>
+      <article class="prose 2xl:prose-xl w-full md:w-1/2 h-full overflow-y-auto px-10 pt-5 bg-zinc-400">${htmlContent}</article>
 
 
       <div class="flex flex-col relative">
