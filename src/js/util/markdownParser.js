@@ -44,9 +44,14 @@ export function parseMarkdown(markdownContent) {
         }
         if (infostring.startsWith("python")) {
           const lines = code.split("\n");
-          const djangoCodeName = lines[0].trim().replace(/^#\s*/, "");
-          const djangoCode = lines.slice(1).join("\n");
-          codeBlocks.django.push({ name: djangoCodeName, code: djangoCode });
+          const djangoCodeName = lines[0].trim();
+          if (djangoCodeName.startsWith("#")) {
+            const djangoCode = lines.slice(1).join("\n");
+            codeBlocks.django.push({
+              name: djangoCodeName.replace(/^#\s*/, ""),
+              code: djangoCode,
+            });
+          }
         }
         return `<pre><code class="${infostring}">${code}</code></pre>`;
       },
