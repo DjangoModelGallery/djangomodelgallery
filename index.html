@@ -23,26 +23,21 @@
       };
     </script>
   </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li class="">
-            <a href="#">프로젝트 소개</a>
-          </li>
-          <li><a href="#">Django Model Gallery</a></li>
+  <body class="">
+    <section id="filter" class="dark:bg-gray-800 flex gap-x-2">
+      <button id="clearFilters" class="dark:text-white">Clear Filters</button>
+    </section>
 
-          <li><a href="./contribute/index.html">기여하기</a></li>
-          <li><a href="./license/index.html">라이센스</a></li>
-        </ul>
-      </nav>
-    </header>
-    <section id="filter" class="flex gap-x-2"></section>
-    <button id="clearFilters">Clear Filters</button>
-    <main></main>
-    <footer></footer>
+    <main class="dark:text-white"></main>
+
+    <footer
+      class="custom-footer bg-gray-800 text-white py-4 fixed bottom-0 w-full z-50 transition-opacity duration-300"
+    ></footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/full.render.js"></script>
+    <script type="module" src="./src/js/components/Header.js"></script>
+    <script type="module" src="./src/js/components/Footer.js"></script>
     <script type="module" src="./src/js/main.js"></script>
   </body>
 </html>

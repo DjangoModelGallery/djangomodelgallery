@@ -3,7 +3,7 @@ import { initializeTheme } from "./util/initializeTheme.js";
 import { filterButtons } from "./constants/filterList.js";
 import MainFilterManager from "./service/MainFilterManager.js";
 import { fetchPosts } from "./util/fetchPost.js";
-import { applySavedTheme } from "./util/toggleTheme.js";
+import { applySavedTheme, toggleTheme } from "./util/toggleTheme.js";
 import { createPostDetailView } from "./views/postDetailView.js";
 import { createPostView } from "./views/postListView.js";
 
@@ -56,10 +56,9 @@ async function renderMainContent() {
 
 applySavedTheme();
 
-// darkmode toggle button 입니다.
-// document
-//   .getElementById("theme-toggle-button")
-//   .addEventListener("click", toggleTheme);
+document
+  .querySelector(".theme-toggle-button")
+  .addEventListener("click", toggleTheme);
 
 initializeTheme();
 renderMainContent();
