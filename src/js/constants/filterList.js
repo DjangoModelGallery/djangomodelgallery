@@ -1,7 +1,13 @@
-export const filterButtons = [
+export const filterOptions = [
   {
-    id: "filterDjango",
-    param: "search",
+    id: "filterModel",
+    param: "model",
+    value: "model",
+    text: "model 검색",
+  },
+  {
+    id: "filterUser",
+    param: "user",
     value: "user",
     text: "user로 검색",
   },
@@ -11,7 +17,6 @@ export const filterButtons = [
     value: "title",
     text: "내림차순",
   },
-
   {
     id: "filterBlogCategory",
     param: "category",

@@ -17,35 +17,35 @@
 export async function fetchPosts() {
   // URL에서 쿼리 파라미터 읽기
   const params = new URLSearchParams(window.location.search);
-  const searchQuery = params.get("search") || "";
+  const searchInput = params.get("query") || "";
+  const searchType = params.get("type") || "";
   const sortBy = params.get("sortBy") || "date";
   const sortDirection = params.get("sortDirection") || "asc";
-  const filterCategory = params.get("category") || "";
-
+  
   const response = await fetch(
     `${window.location.origin}/src/postsList/postsList.json`,
   );
+  
   if (!response.ok) {
     throw new Error("데이터를 가져오는데 실패했습니다.");
   }
   let posts = await response.json();
 
-  // 검색 쿼리에 따라 필터링
-  if (searchQuery) {
-    posts = posts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.tags.some((tag) =>
-          tag.toLowerCase().includes(searchQuery.toLowerCase()),
-        ),
+  // model, user, category 에 따른 검색 처리
+  if (searchInput && searchType === 'model') {
+    posts = posts.filter((post) => 
+        post.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+        post.category.toLowerCase().includes(searchInput.toLowerCase()) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(searchInput.toLowerCase()))
     );
+  } else if (searchInput && searchType === 'user') {
+    posts = posts.filter((post) => 
+        post.contributor.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+  } else if (searchInput && searchType === 'category') {
+      posts = posts.filter((post) => post.category === searchInput);
   }
-
-  // 카테고리에 따라 필터링
-  if (filterCategory) {
-    posts = posts.filter((post) => post.category === filterCategory);
-  }
-
+  
   // 정렬
   posts.sort((a, b) => {
     let comparison = 0;

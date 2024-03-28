@@ -1,3 +1,4 @@
+
 // menu style
 const menuListStyle = `md:ml-10 text-base leading-snug text-surface hover:text-graylv3 font-medium capitalize`;
 
@@ -83,3 +84,8 @@ const pageMoveButtonStyle = `relative flex inline-flex items-center rounded-[10p
 const pageNumberListStyle = `flex items-center justify-center gap-1`;
 const pageNumberStyle = `relative inline-flex items-center w-10 h-10 px-4 py-2 text-md font-normal text-graylv3`;
 const pageNumberActiveStyle = `text-primary font-bold`;
+
+export default {
+    searchInputStyle,
+
+}
