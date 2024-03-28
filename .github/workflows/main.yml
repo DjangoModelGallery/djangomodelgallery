@@ -1,0 +1,15 @@
+name: Test Open Python file
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  open-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Open Python file
+        run: python src/python/json.py file1
