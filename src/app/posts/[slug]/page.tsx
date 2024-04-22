@@ -1,7 +1,7 @@
+// posts/[slug]/page.tsx
 import Layout from "@/components/Layout";
 import { Post } from "@/components/Post";
-import { getPost } from "@/lib/getPost";
-import { notFound } from "next/navigation";
+import postDetailServer from "./postDetail.server";
 
 export default async function DetailPage({
   params,
@@ -10,9 +10,7 @@ export default async function DetailPage({
     slug: string;
   };
 }) {
-  const post = await getPost(params.slug);
-
-  if (!post) return notFound();
+  const post = await postDetailServer(params.slug);
 
   return (
     <Layout>

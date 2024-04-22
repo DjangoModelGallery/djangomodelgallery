@@ -1,4 +1,7 @@
 // Header.tsx
+import { formatQuery } from "@/utils/formatQuery";
+import Link from "next/link";
+import { CATEGORIES_ARRAY } from "../../constants/categories";
 import { NAVBAR_TITLE } from "../../constants/navigation";
 
 export default function Header() {
@@ -7,6 +10,17 @@ export default function Header() {
       <div className="navbar-start"></div>
       <div className="navbar-start">
         <h1 className="">{NAVBAR_TITLE}</h1>
+      </div>
+      <div>
+        {CATEGORIES_ARRAY.map((category) => (
+          <Link
+            key={category.categoryName}
+            href={`posts/?category=${formatQuery(category.categoryName)}`}
+            className="btn btn-ghost"
+          >
+            {category.title}
+          </Link>
+        ))}
       </div>
       <div className="navbar-end">
         <label className="input input-bordered flex items-center gap-2">

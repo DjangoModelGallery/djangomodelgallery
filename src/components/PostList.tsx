@@ -1,6 +1,7 @@
 // app/posts/PostList.client.tsx
 "use client";
 import { Post } from "@/types/posts/posts";
+import { formatQuery } from "@/utils/formatQuery";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -10,7 +11,10 @@ function PostList({ posts }: { posts: (Post | null)[] }) {
 
   const filteredPosts = category
     ? posts.filter(
-        (post: Post | null) => post && post.frontmatter.category === category
+        (post: Post | null) =>
+          post &&
+          post.frontmatter.category &&
+          formatQuery(post.frontmatter.category.toString()) === category
       )
     : posts;
 

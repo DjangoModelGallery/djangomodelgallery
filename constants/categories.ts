@@ -1,3 +1,4 @@
+import { Category } from "@/types/posts/posts";
 import BlogIcon from "../assets/icons/blog.svg";
 
 /**
@@ -16,34 +17,30 @@ import BlogIcon from "../assets/icons/blog.svg";
  *
  */
 
-interface Category {
-  [key: string]: {
-    title: string;
-    description: string;
-    icon: string;
-  };
-}
-
 const CATEGORIES: Category = {
   shopping: {
+    categoryName: "shopping",
     title: "쇼핑",
     description: "쇼핑 관련한 정보를 담은 카테고리",
     icon: BlogIcon,
   },
 
   blog: {
+    categoryName: "blog",
     title: "블로그",
     description: "블로그 관련한 정보를 담은 카테고리",
     icon: BlogIcon,
   },
 
   accounts: {
+    categoryName: "accounts",
     title: "계정",
     description: "계정 관련한 정보를 담은 카테고리",
     icon: BlogIcon,
   },
 
   logos: {
+    categoryName: "logos",
     title: "로고",
     description: "로고 관련한 정보를 담은 카테고리",
     icon: BlogIcon,

@@ -1,7 +1,7 @@
 // app/posts/page.tsx
 import getPostList from "@/app/posts/postList.server";
 import Layout from "@/components/Layout";
-import PostList from "./postList.client";
+import PostList from "@/components/PostList";
 
 export default async function PostListPage() {
   const posts = await getPostList();

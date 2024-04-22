@@ -8,10 +8,10 @@ interface Post {
 }
 
 interface CategoryItem {
+  categoryName: string;
   title: string;
   description: string;
   icon: string;
-  key: string;
 }
 
 interface Category {
