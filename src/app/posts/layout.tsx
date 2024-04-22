@@ -1,30 +1,9 @@
 // app/posts/layout.tsx
 import { Metadata } from "next";
+import { LOOT_POSTS_METADATA } from "../../../constants/SEO";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Posts",
-    description: "DMG, All Models can be founded here.",
-    openGraph: {
-      title: "Posts",
-      description: "DMG, All Models can be founded here.",
-      url: "https://example.com/posts",
-      siteName: "DMG",
-      locale: "ko_KR",
-      type: "website",
-      images: [
-        {
-          url: "",
-          width: 800,
-          height: 600,
-          alt: "DMG",
-        },
-      ],
-    },
-    icons: {
-      shortcut: "",
-    },
-  };
+  return LOOT_POSTS_METADATA;
 }
 
 export default function PostsLayout({

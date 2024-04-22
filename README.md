@@ -35,6 +35,8 @@ root의 constants 폴더를 확인하세요.
 
 ### 미디어 쿼리 브레이크포인트 설정
 
+constants > media.ts
+
 미디어 쿼리 브레이크포인트는 다음과 같이 설정합니다:
 
 ```ts
@@ -53,6 +55,8 @@ export { breakpoints };
 
 ### 네비게이션 바 항목 설정
 
+constants > navigation.ts
+
 네비게이션 바 항목은 다음과 같이 설정합니다:
 
 ```ts
@@ -68,6 +72,8 @@ export { NAVBAR_ITEMS, NAVBAR_TITLE, NAVBAR_TITLE_SHORT };
 ```
 
 ### 카테고리 설정
+
+constants > categories.ts
 
 카테고리는 다음과 같이 설정합니다:
 
@@ -92,3 +98,23 @@ const CATEGORIES_ARRAY = Object.entries(CATEGORIES).map(([key, value]) => ({
 export { CATEGORIES, CATEGORIES_ARRAY };
 export type CategoryKey = keyof typeof CATEGORIES;
 ```
+
+카테고리 아이콘
+
+> https://fonts.google.com/icons
+
+### 메타데이터 설정
+
+constants > SEO.ts
+
+LOOT_LAYOUT_METADATA
+
+LOOT_POSTS_METADATA
+
+LOOT_POST_DETAIL_METADATA
+
+현재 3개가 있고, 이 중에서 POST_DETAIL은 동적으로 메타데이터를 교체할 수 있습니다.
+
+Next.js의 metadata 공식문서를 참고하여 필요한 prop을 추가할 수 있습니다.
+
+> https://nextjs.org/docs/app/api-reference/functions/generate-metadata
