@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src",
-    "src/types"
+    "src/types",
+    "constants"
   ],
   "exclude": ["node_modules"]
 }

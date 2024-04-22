@@ -1,6 +1,4 @@
-import { CATEGORIES } from "@/constants/categories";
-
-type CategoryKey = keyof typeof CATEGORIES;
+import { CategoryKey } from "../../../constants/categories";
 
 interface Contributor {
   name: string;

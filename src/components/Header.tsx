@@ -1,5 +1,5 @@
 // Header.tsx
-import { NAVBAR_TITLE } from "@/constants/navigation";
+import { NAVBAR_TITLE } from "../../constants/navigation";
 
 export default function Header() {
   return (

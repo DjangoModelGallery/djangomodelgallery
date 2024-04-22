@@ -1,6 +1,6 @@
-import { breakpoints as defaultBreakpoints } from "@/constants/media";
 import { Breakpoint, Breakpoints } from "@/types/ui/media";
 import { useCallback, useLayoutEffect, useState } from "react";
+import { breakpoints as defaultBreakpoints } from "../../constants/media";
 
 /**
  * `useTailwindBreakpoint`는 Tailwind CSS의 브레이크포인트에 따라 현재 화면 너비를 반환하는 훅입니다.
