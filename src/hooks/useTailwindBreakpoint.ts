@@ -18,6 +18,7 @@ export default function useTailwindBreakpoint(
 
   const matchMedia = useCallback(
     () => ({
+      xs: window.matchMedia(`(min-width: ${breakpoints.xs})`),
       sm: window.matchMedia(`(min-width: ${breakpoints.sm})`),
       md: window.matchMedia(`(min-width: ${breakpoints.md})`),
       lg: window.matchMedia(`(min-width: ${breakpoints.lg})`),
