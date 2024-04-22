@@ -1,5 +1,4 @@
 import { Category } from "@/types/posts/posts";
-import BlogIcon from "../assets/icons/blog.svg";
 
 /**
  * CATEGORIES는 다양한 카테고리에 대한 정보를 담고 있는 상수 객체입니다.
@@ -11,8 +10,8 @@ import BlogIcon from "../assets/icons/blog.svg";
  * education: {
  *   description: "교육 관련한 정보를 담은 카테고리",
  *
- * 아이콘은 유효한 SVG를 제공해야 합니다.
- *   icon: `...`, // SVG icon을 import하거나 code를 여기에 넣으세요.
+ * 아이콘은 유효한 이미지 URL을 제공해야 합니다. (SVG 또는 PNG)
+ *   icon: "/path/to/icon.svg", // 또는 "/path/to/icon.png"
  * }
  *
  */
@@ -22,28 +21,28 @@ const CATEGORIES: Category = {
     categoryName: "shopping",
     title: "쇼핑",
     description: "쇼핑 관련한 정보를 담은 카테고리",
-    icon: BlogIcon,
+    icon: "/assets/icons/star.svg",
   },
 
   blog: {
     categoryName: "blog",
     title: "블로그",
     description: "블로그 관련한 정보를 담은 카테고리",
-    icon: BlogIcon,
+    icon: "/assets/icons/blog.svg",
   },
 
   accounts: {
     categoryName: "accounts",
     title: "계정",
     description: "계정 관련한 정보를 담은 카테고리",
-    icon: BlogIcon,
+    icon: "/assets/icons/people.png",
   },
 
   logos: {
     categoryName: "logos",
     title: "로고",
     description: "로고 관련한 정보를 담은 카테고리",
-    icon: BlogIcon,
+    icon: "",
   },
 };
 

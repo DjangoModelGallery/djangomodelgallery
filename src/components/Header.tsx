@@ -1,5 +1,6 @@
 // Header.tsx
 import { formatQuery } from "@/utils/formatQuery";
+import Image from "next/image";
 import Link from "next/link";
 import { CATEGORIES_ARRAY } from "../../constants/categories";
 import { NAVBAR_TITLE } from "../../constants/navigation";
@@ -18,6 +19,12 @@ export default function Header() {
             href={`posts/?category=${formatQuery(category.categoryName)}`}
             className="btn btn-ghost"
           >
+            <Image
+              src={category?.icon || "/assets/icons/blog.svg"}
+              alt={category.title}
+              width={10}
+              height={10}
+            />
             {category.title}
           </Link>
         ))}
