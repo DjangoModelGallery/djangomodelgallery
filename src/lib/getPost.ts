@@ -1,5 +1,8 @@
+// getPost.ts
+
 import type { FrontmatterData } from "@/types/posts/frontmatters";
 import { Post } from "@/types/posts/posts";
+import { parseMarkdown } from "@/utils/parseMarkdownContents";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
@@ -27,11 +30,14 @@ export const getPost = cache(async (slug: string) => {
         const postSlug = frontmatter.fileName.split("_")[0];
 
         if (postSlug === slug) {
+          const parsedContent = parseMarkdown(content);
+
           return {
             frontmatter,
-            body: content,
+            body: parsedContent.html,
             title: frontmatter.title || "No Title",
             slug: postSlug,
+            tableOfContents: parsedContent.tableOfContents,
           } as Post;
         }
 

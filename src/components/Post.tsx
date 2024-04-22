@@ -12,7 +12,7 @@ export function Post({
 }) {
   const { title, date, category, tags } = frontmatter;
 
-  const htmlContent = md.render(children);
+  const html = md.render(children);
 
   return (
     <article className="post overflow-x-scroll">
@@ -32,7 +32,7 @@ export function Post({
       </div>
       <div
         className="post-content prose"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     </article>
   );

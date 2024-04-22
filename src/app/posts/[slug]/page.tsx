@@ -11,6 +11,7 @@ export default async function DetailPage({
   };
 }) {
   const post = await postDetailServer(params.slug);
+  console.log("🚀 ~ post:", post);
 
   return (
     <Layout>
