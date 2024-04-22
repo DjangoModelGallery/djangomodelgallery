@@ -27,7 +27,12 @@ export const getPost = cache(async (slug: string) => {
         const postSlug = frontmatter.fileName.split("_")[0];
 
         if (postSlug === slug) {
-          return { frontmatter, body: content, slug: postSlug } as Post;
+          return {
+            frontmatter,
+            body: content,
+            title: frontmatter.title || "No Title",
+            slug: postSlug,
+          } as Post;
         }
 
         return null;

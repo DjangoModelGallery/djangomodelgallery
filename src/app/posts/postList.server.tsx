@@ -5,15 +5,15 @@ import Link from "next/link";
 
 async function PostList() {
   const posts = await getPosts();
-  console.log(posts);
+
   return (
-    <ul>
+    <ul className="grid grid-cols-3 gap-4">
       {posts?.map(
         (post: Post | null) =>
           post && (
-            <Link href={`/posts/${post.slug}`} key={post.slug}>
-              {post.title}
-            </Link>
+            <li key={post.slug}>
+              <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+            </li>
           )
       )}
     </ul>

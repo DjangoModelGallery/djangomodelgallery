@@ -9,10 +9,10 @@ export async function generateMetadata({
   const postDetail = await getPost(params.slug as string);
   return {
     title: postDetail?.title,
-    description: "PostDetail",
+    description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
     openGraph: {
       title: postDetail?.title,
-      description: "PostDetail",
+      description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
       type: "website",
     },
   };

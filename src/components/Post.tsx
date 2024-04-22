@@ -18,7 +18,9 @@ export function Post({
     <article className="post">
       <h1 className="post-title">{title}</h1>
       <div className="post-meta">
-        <time dateTime={date}>{format(new Date(date), "MMMM d, yyyy")}</time>
+        <time dateTime={new Date(date).toISOString()}>
+          {format(new Date(date), "yyyy년 M월 d일")}
+        </time>
         <span className="post-meta-separator">•</span>
         <span>{category}</span>
       </div>

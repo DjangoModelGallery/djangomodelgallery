@@ -1,69 +1,14 @@
 // Header.tsx
-import { NAVBAR_ITEMS, NAVBAR_TITLE } from "@/constants/navigation";
-import { IsOpen } from "@/types/ui/toggle";
-import { useState } from "react";
-import tw, { styled } from "twin.macro";
-
-const Navbar = styled.div`
-  ${tw`navbar bg-base-100`}
-`;
-const NavbarSection = styled.div`
-  ${tw`navbar-start`}
-`;
-const DropdownButton = styled.div`
-  ${tw`btn btn-ghost btn-circle`}
-`;
-const SvgIcon = styled.svg`
-  ${tw`h-5 w-5`}
-`;
-const Menu = styled.ul<IsOpen>(({ isopen }) => [
-  tw`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52`,
-  isopen ? tw`block` : tw`hidden`,
-]);
-const MenuItem = styled.li``;
-const Input = styled.input`
-  ${tw`input input-bordered hidden xl:block`}
-`;
+import { NAVBAR_TITLE } from "@/constants/navigation";
 
 export default function Header() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
   return (
-    <Navbar>
-      <NavbarSection>
-        <div className="dropdown" onClick={toggleDropdown}>
-          <DropdownButton tabIndex={0} role="button">
-            <SvgIcon
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </SvgIcon>
-          </DropdownButton>
-          <Menu isopen={dropdownOpen} tabIndex={0}>
-            {NAVBAR_ITEMS.map((item, index) => (
-              <MenuItem key={index}>
-                <a>{item}</a>
-              </MenuItem>
-            ))}
-          </Menu>
-        </div>
-      </NavbarSection>
-      <NavbarSection>
-        <h1 className=" text-xl">{NAVBAR_TITLE}</h1>
-      </NavbarSection>
-      <NavbarSection tw="navbar-end">
+    <div className="navbar bg-base-100">
+      <div className="navbar-start"></div>
+      <div className="navbar-start">
+        <h1 className="text-xl">{NAVBAR_TITLE}</h1>
+      </div>
+      <div className="navbar-end">
         <label className="input input-bordered flex items-center gap-2">
           <input type="text" className="grow" placeholder="Search" />
           <svg
@@ -81,7 +26,7 @@ export default function Header() {
         </label>
         <button className="btn btn-ghost btn-circle"></button>
         {/* More buttons as needed */}
-      </NavbarSection>
-    </Navbar>
+      </div>
+    </div>
   );
 }

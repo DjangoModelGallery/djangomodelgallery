@@ -1,15 +1,15 @@
-// app/notice/layout.tsx
+// app/posts/layout.tsx
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Notice",
-    description: "Safe Eye, Detect all threats.",
+    title: "Posts",
+    description: "DMG, All Models can be founded here.",
     openGraph: {
-      title: "Notice",
-      description: "Safe Eye, Detect all treats.",
-      url: "https://example.com/notice",
-      siteName: "Safe Eye",
+      title: "Posts",
+      description: "DMG, All Models can be founded here.",
+      url: "https://example.com/posts",
+      siteName: "DMG",
       locale: "ko_KR",
       type: "website",
       images: [
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "",
           width: 800,
           height: 600,
-          alt: "Safe Eye",
+          alt: "DMG",
         },
       ],
     },
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function NoticeLayout({
+export default function PostsLayout({
   children,
 }: {
   children: React.ReactNode;
