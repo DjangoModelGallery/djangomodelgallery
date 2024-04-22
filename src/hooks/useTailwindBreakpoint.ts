@@ -2,67 +2,50 @@ import { Breakpoint, Breakpoints } from "@/types/ui/media";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { breakpoints as defaultBreakpoints } from "../../constants/media";
 
+const parseBreakpoints = (
+  breakpoints: Breakpoints
+): { [key in Breakpoint]: number } => {
+  const numericBreakpoints: { [key in Breakpoint]: number } = {} as {
+    [key in Breakpoint]: number;
+  };
+  (Object.keys(breakpoints) as Breakpoint[]).forEach((key) => {
+    numericBreakpoints[key] = parseInt(breakpoints[key].replace("px", ""), 10);
+  });
+  return numericBreakpoints;
+};
+
 /**
- * `useTailwindBreakpoint`는 Tailwind CSS의 브레이크포인트에 따라 현재 화면 너비를 반환하는 훅입니다.
- * 이 훅은 브라우저의 `resize` 이벤트를 감지하여 화면 너비가 변경될 때마다 브레이크포인트를 업데이트합니다.
+ * Tailwind CSS 브레이크포인트에 따라 현재 윈도우의 너비를 숫자로 반환하고,
+ * 각 브레이크포인트에 대한 너비가 설정된 값보다 작은지 여부를 확인하는 훅입니다.
+ * 이 훅은 반응형 디자인에서 조건부 렌더링을 용이하게 하기 위해 사용됩니다.
  *
- * 반환값은 현재 화면 너비에 해당하는 브레이크포인트의 이름입니다.
- * 화면 너비가 어떤 브레이크포인트에도 해당하지 않는 경우, 반환값은 `null`입니다.
- *
- * 이 훅은 반응형 디자인을 구현하는 데 사용할 수 있습니다.
+ * @param {Breakpoints} breakpoints - 브레이크포인트의 최소 너비를 정의하는 객체. 기본값은 프로젝트 전역 설정입니다.
+ * @returns {object} 반환 객체는 다음 두 가지 속성을 포함합니다:
+ *   - width: 현재 윈도우의 너비를 나타내는 숫자.
+ *   - breakpoints: 각 브레이크포인트의 너비를 숫자로 변환한 객체.
+ *     이 객체의 각 키는 브레이크포인트의 이름이며, 값은 해당 브레이크포인트의 최소 너비를 나타냅니다.
  */
+
 export default function useTailwindBreakpoint(
   breakpoints: Breakpoints = defaultBreakpoints
 ) {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint | null>(null);
+  const numericBreakpoints = parseBreakpoints(breakpoints);
+  const [width, setWidth] = useState<number>(0);
 
-  const matchMedia = useCallback(
-    () => ({
-      xs: window.matchMedia(`(min-width: ${breakpoints.xs})`),
-      sm: window.matchMedia(`(min-width: ${breakpoints.sm})`),
-      md: window.matchMedia(`(min-width: ${breakpoints.md})`),
-      lg: window.matchMedia(`(min-width: ${breakpoints.lg})`),
-      xl: window.matchMedia(`(min-width: ${breakpoints.xl})`),
-      "2xl": window.matchMedia(`(min-width: ${breakpoints["2xl"]})`),
-    }),
-    [breakpoints]
-  );
-
-  const handleResize = useCallback(() => {
-    const queries = matchMedia();
-    if (queries["2xl"].matches) {
-      setBreakpoint("2xl");
-    } else if (queries.xl.matches) {
-      setBreakpoint("xl");
-    } else if (queries.lg.matches) {
-      setBreakpoint("lg");
-    } else if (queries.md.matches) {
-      setBreakpoint("md");
-    } else if (queries.sm.matches) {
-      setBreakpoint("sm");
-    } else {
-      setBreakpoint(null);
-    }
-  }, [matchMedia]);
+  const updateWidth = useCallback(() => {
+    setWidth(window.innerWidth);
+  }, []);
 
   useLayoutEffect(() => {
     if (typeof window !== "undefined") {
-      const queries = matchMedia();
-      const listeners = Object.entries(queries).map(([key, query]) => {
-        const listener = () => handleResize();
-        query.addListener(listener);
-        return [key, listener] as const;
-      });
-
-      handleResize();
+      updateWidth();
+      window.addEventListener("resize", updateWidth);
 
       return () => {
-        listeners.forEach(([key, listener]) => {
-          queries[key as Breakpoint].removeListener(listener);
-        });
+        window.removeEventListener("resize", updateWidth);
       };
     }
-  }, [handleResize, matchMedia]);
+  }, [updateWidth]);
 
-  return breakpoint;
+  return { width, breakpoints: numericBreakpoints };
 }

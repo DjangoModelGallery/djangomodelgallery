@@ -17,6 +17,12 @@ import { Category } from "@/types/posts/posts";
  */
 
 const CATEGORIES: Category = {
+  all: {
+    categoryName: "all",
+    title: "전체",
+    description: "모든 카테고리에 대한 정보를 담은 카테고리",
+    icon: "/assets/icons/all.svg",
+  },
   shopping: {
     categoryName: "shopping",
     title: "쇼핑",
