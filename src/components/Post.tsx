@@ -15,8 +15,7 @@ export function Post({
   const htmlContent = md.render(children);
 
   return (
-    <article className="post">
-      <h1 className="post-title">{title}</h1>
+    <article className="post overflow-x-scroll">
       <div className="post-meta">
         <time dateTime={new Date(date).toISOString()}>
           {format(new Date(date), "yyyy년 M월 d일")}
@@ -32,7 +31,7 @@ export function Post({
         ))}
       </div>
       <div
-        className="post-content prose prose-lg"
+        className="post-content prose"
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
     </article>

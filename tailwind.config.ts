@@ -11,23 +11,31 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    typography: {
-      DEFAULT: {
-        css: {
-          h1: {
-            color: "lime-500",
-          },
-        },
-        sm: {
+    extend: {
+      typography: {
+        DEFAULT: {
           css: {
-            backgroundColor: "lime-600",
+            color: "#333",
+            backgroundColor: "#ccc",
+            h1: {
+              color: "lime",
+            },
+            a: {
+              color: "#3182ce",
+              "&:hover": {
+                color: "#2c5282",
+              },
+            },
           },
         },
       },
     },
   },
-
-  plugins: [require("daisyui"), require("tailwind-scrollbar-hide")],
-  require: "@tailwindcss/typography",
+  plugins: [
+    require("daisyui"),
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/typography"),
+  ],
 };
+
 export default config;

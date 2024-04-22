@@ -6,7 +6,7 @@ export default function Header() {
     <div className="navbar bg-base-100">
       <div className="navbar-start"></div>
       <div className="navbar-start">
-        <h1 className="text-xl">{NAVBAR_TITLE}</h1>
+        <h1 className="">{NAVBAR_TITLE}</h1>
       </div>
       <div className="navbar-end">
         <label className="input input-bordered flex items-center gap-2">
