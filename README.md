@@ -9,8 +9,86 @@
 
 - Zustand
 
-### uI
+### UI
 
 - tailwindCSS
-- twin.macro with Styled components
 - daisyUI
+
+## 프로젝트 사용법
+
+### 실행 방법
+
+```bash
+git clone [repo-url] [appname]
+cd [appname]
+npm install
+
+
+npm run dev
+```
+
+### Constants
+
+이 프로젝트에서는 여러 가지 설정과 상수를 사용하여 컨텐츠를 정의할 수 있습니다. 현재는 프로젝트의 미디어 쿼리 브레이크포인트, 네비게이션 바 항목, 카테고리 등을 커스텀합니다.
+
+root의 constants 폴더를 확인하세요.
+
+### 미디어 쿼리 브레이크포인트 설정
+
+미디어 쿼리 브레이크포인트는 다음과 같이 설정합니다:
+
+```ts
+import { Breakpoints } from "@/types/ui/media";
+
+const breakpoints: Breakpoints = {
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
+  "2xl": "1536px",
+};
+
+export { breakpoints };
+```
+
+### 네비게이션 바 항목 설정
+
+네비게이션 바 항목은 다음과 같이 설정합니다:
+
+```ts
+import { CATEGORIES } from "./categories";
+
+const categoryTitles = Object.keys(CATEGORIES);
+const NAVBAR_ITEMS = ["Home", "About", "Contact", ...categoryTitles];
+
+const NAVBAR_TITLE = "Django Model Gallery";
+const NAVBAR_TITLE_SHORT = "DMG";
+
+export { NAVBAR_ITEMS, NAVBAR_TITLE, NAVBAR_TITLE_SHORT };
+```
+
+### 카테고리 설정
+
+카테고리는 다음과 같이 설정합니다:
+
+```ts
+import { Category } from "@/types/posts/posts";
+
+const CATEGORIES: Category = {
+  shopping: {
+    categoryName: "shopping",
+    title: "쇼핑",
+    description: "쇼핑 관련한 정보를 담은 카테고리",
+    icon: "/assets/icons/star.svg",
+  },
+  // ...
+};
+
+const CATEGORIES_ARRAY = Object.entries(CATEGORIES).map(([key, value]) => ({
+  key,
+  ...value,
+}));
+
+export { CATEGORIES, CATEGORIES_ARRAY };
+export type CategoryKey = keyof typeof CATEGORIES;
+```

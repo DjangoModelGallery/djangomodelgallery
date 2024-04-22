@@ -1,4 +1,5 @@
 interface Breakpoints {
+  xs: string;
   sm: string;
   md: string;
   lg: string;
@@ -9,6 +10,7 @@ interface Breakpoints {
 type Breakpoint = keyof Breakpoints;
 
 const breakpoints: Breakpoints = {
+  xs: "475px",
   sm: "640px",
   md: "768px",
   lg: "1024px",

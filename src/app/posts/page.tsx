@@ -8,7 +8,7 @@ export default async function PostListPage() {
 
   return (
     <Layout>
-      <h1>게시물 목록</h1>
+      <h1 className="">게시물 목록</h1>
       <PostList posts={posts} />
     </Layout>
   );

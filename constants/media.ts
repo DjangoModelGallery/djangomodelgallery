@@ -9,6 +9,7 @@ import { Breakpoints } from "@/types/ui/media";
  * 필요에 따라 이 값을 변경하여 프로젝트의 요구 사항에 맞게 브레이크포인트를 사용자 정의할 수 있습니다.
  */
 const breakpoints: Breakpoints = {
+  xs: "475px",
   sm: "640px",
   md: "768px",
   lg: "1024px",
