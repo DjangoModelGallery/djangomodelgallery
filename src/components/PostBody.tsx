@@ -1,18 +1,11 @@
+import { Post } from "@/types/posts/posts";
 import { format } from "date-fns";
 import MarkdownIt from "markdown-it";
 
 const md = new MarkdownIt();
 
-export function Post({
-  frontmatter,
-  children,
-}: {
-  frontmatter: any;
-  children: string;
-}) {
-  const { title, date, category, tags } = frontmatter;
-
-  const html = md.render(children);
+export default function PostBody(postContent: Post) {
+  const { title, date, category, tags } = postContent.frontmatter;
 
   return (
     <article className="post overflow-x-scroll">
@@ -32,7 +25,7 @@ export function Post({
       </div>
       <div
         className="post-content prose"
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{ __html: postContent?.body }}
       />
     </article>
   );

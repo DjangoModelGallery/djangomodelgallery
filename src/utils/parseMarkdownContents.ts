@@ -2,6 +2,7 @@
 
 import { ParsedMarkdown } from "@/types/code/markdown";
 import MarkdownIt from "markdown-it";
+import anchor from "markdown-it-anchor";
 import footnote from "markdown-it-footnote";
 import toc from "markdown-it-toc-done-right";
 
@@ -46,6 +47,11 @@ export const parseMarkdown = (
     linkify: true,
     typographer: true,
   })
+    .use(anchor, {
+      permalink: true,
+      permalinkBefore: true,
+      permalinkSymbol: "§",
+    })
     .use(toc)
     .use(footnote);
 

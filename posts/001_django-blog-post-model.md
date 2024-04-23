@@ -20,8 +20,10 @@ contributor:
 
 이 글에서는 Django를 사용하여 블로그 애플리케이션을 만들 때 사용할 수 있는 블로그 포스트 모델에 대해 알아보겠습니다.
 
+[[toc]]
 
 ## 장고 모델 코드
+
 ```python
 # blog > models.py
 
@@ -89,7 +91,11 @@ class Attachment(models.Model):
 
     def __str__(self):
         return f"Attachment for {self.post.title}"
+
 ```
+
+[^1]
+
 ```python
 # accounts > models.py
 from django.contrib.auth.models import AbstractUser
@@ -108,7 +114,10 @@ class CustomUser(AbstractUser):
         return self.username
 ```
 
-## ERD
+[^2]
+
+### ERD
+
 ```viz
 digraph AppSchema {
   rankdir=LR; // 노드들을 가로로 배치
@@ -165,7 +174,7 @@ digraph AppSchema {
                 <tr><td>Image</td></tr>
                 <tr><td port="post_id_fld">🔑 post_id (FK)</td></tr>
                </table>>];
-    
+
     Attachment [label=<<table border="0" cellborder="1" cellspacing="0">
                 <tr><td port="attach_file" bgcolor="lightgrey"><b>Attachment</b></td></tr>
                 <tr><td port="id_fId">🔐 id</td></tr>
@@ -206,51 +215,68 @@ digraph AppSchema {
   Post:category_id_fId -> Category:id_fId [arrowhead="none", arrowtail="crow", dir="none"];
 
 }
-
 ```
 
+[^3]
+
 ## 모델 생성 프롬프트
+
 ### 1. Post 모델
- - title : Post의 제목을 저장합니다.
- - content : Post의 내용을 저장합니다.
- - created_at : Post의 생성 시간을 자동으로 저장합니다.
- - updated_at : Post의 수정 시간을 자동으로 저장합니다.
- - author : Post의 작성자(User)를 외래키로 연결합니다.
- - view_count : Post의 조회 수를 저장합니다.
- - category : Post의 Category를 외래키로 연결합니다.
+
+- title : Post의 제목을 저장합니다.
+- content : Post의 내용을 저장합니다.
+- created_at : Post의 생성 시간을 자동으로 저장합니다.
+- updated_at : Post의 수정 시간을 자동으로 저장합니다.
+- author : Post의 작성자(User)를 외래키로 연결합니다.
+- view_count : Post의 조회 수를 저장합니다.
+- category : Post의 Category를 외래키로 연결합니다.
 
 ### 2. Comment 모델
- - post : Comment가 달린 Post를 외래키로 연결합니다.
- - content : Comment의 내용을 저장합니다.
- - created_at : Comment의 생성 시간을 자동으로 저장합니다.
- - updated_at : Comment의 수정 시간을 자동으로 저장합니다.
- - author : Comment의 작성자(User)를 외래키로 연결합니다.
+
+- post : Comment가 달린 Post를 외래키로 연결합니다.
+- content : Comment의 내용을 저장합니다.
+- created_at : Comment의 생성 시간을 자동으로 저장합니다.
+- updated_at : Comment의 수정 시간을 자동으로 저장합니다.
+- author : Comment의 작성자(User)를 외래키로 연결합니다.
 
 ### 3. Reply 모델
- - comment : Reply가 달린 Comment를 외래키로 연결합니다.
- - content : Reply의 내용을 저장합니다.
- - created_at : Reply의 생성 시간을 자동으로 저장합니다.
- - updated_at : Reply의 수정 시간을 자동으로 저장합니다.
- - author : Reply의 작성자(User)를 외래키로 연결합니다.
+
+- comment : Reply가 달린 Comment를 외래키로 연결합니다.
+- content : Reply의 내용을 저장합니다.
+- created_at : Reply의 생성 시간을 자동으로 저장합니다.
+- updated_at : Reply의 수정 시간을 자동으로 저장합니다.
+- author : Reply의 작성자(User)를 외래키로 연결합니다.
 
 ### 4. Category 모델
- - name : Category명을 저장합니다.
+
+- name : Category명을 저장합니다.
 
 ### 5. Image 모델
- - post : Image를 갖는 Post를 외래키로 연결합니다.
- - image : Image가 저장된 경로를 저장합니다.
+
+- post : Image를 갖는 Post를 외래키로 연결합니다.
+- image : Image가 저장된 경로를 저장합니다.
 
 ### 6. Attachment 모델
- - post : Attachment를 갖는 Post를 외래키로 연결합니다.
- - attach_file : Attachment가 저장된 경로를 저장합니다.
+
+- post : Attachment를 갖는 Post를 외래키로 연결합니다.
+- attach_file : Attachment가 저장된 경로를 저장합니다.
 
 ### 7. User 모델
- - username : User명을 저장합니다.
- - email : User의 email을 저장합니다.
- - is_active : User의 활동 여부를 Boolean 값으로 저장합니다.
- - is_staff : User의 권한이 admin인지를 Boolean 값으로 저장합니다.
- - cerated_at : User의 생성 시간을 자동으로 저장합니다.
- - updated-at : User의 수정 시간을 자동으로 저장합니다.
+
+- username : User명을 저장합니다.
+- email : User의 email을 저장합니다.
+- is_active : User의 활동 여부를 Boolean 값으로 저장합니다.
+- is_staff : User의 권한이 admin인지를 Boolean 값으로 저장합니다.
+- cerated_at : User의 생성 시간을 자동으로 저장합니다.
+- updated-at : User의 수정 시간을 자동으로 저장합니다.
+
+[^4]
 
 ## 기여자의 설명
- - User 모델의 경우 사용하는 사용자 모델을 적용해도 무관합니다.
+
+- User 모델의 경우 사용하는 사용자 모델을 적용해도 무관합니다.
+
+[^1]: `blog > models.py`에서 정의된 블로그 관련 모델 코드입니다.
+[^2]: `accounts > models.py`에서 정의된 사용자 모델 코드입니다.
+[^3]: ERD 다이어그램은 블로그 애플리케이션의 데이터베이스 구조를 시각화한 것입니다.
+[^4]: 각 모델의 필드와 역할을 설명하는 모델 생성 프롬프트입니다.

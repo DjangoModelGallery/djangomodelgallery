@@ -1,6 +1,6 @@
 // posts/[slug]/page.tsx
 import Layout from "@/components/Layout";
-import { Post } from "@/components/Post";
+import PostBody from "@/components/PostBody";
 import postDetailServer from "./postDetail.server";
 
 export default async function DetailPage({
@@ -11,13 +11,11 @@ export default async function DetailPage({
   };
 }) {
   const post = await postDetailServer(params.slug);
-  console.log("🚀 ~ post:", post);
 
   return (
     <Layout>
       <article className="prose">
-        <h1>{post?.title}</h1>
-        <Post frontmatter={post?.frontmatter}>{post?.body}</Post>
+        <PostBody {...post} />
       </article>
     </Layout>
   );
