@@ -1,6 +1,6 @@
 export default function TableOfContents({ toc }: { toc: string }) {
   return (
-    <div className="toc dropdown dropdown-hover dropdown-top w-full">
+    <div className="toc dropdown dropdown-hover dropdown-top w-full h-full">
       <div tabIndex={0} role="button" className="btn btn-outline btn-sm">
         목차보기
       </div>

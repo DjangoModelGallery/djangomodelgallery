@@ -1,7 +1,7 @@
 // posts/[slug]/page.tsx
-import CodeBody from "@/components/CodeBody";
+
 import Layout from "@/components/Layout";
-import PostBody from "@/components/PostBody";
+import PostDetail from "@/components/PostDetail";
 import postDetailServer from "./postDetail.server";
 
 export default async function DetailPage({
@@ -15,14 +15,7 @@ export default async function DetailPage({
 
   return (
     <Layout>
-      <section className="w-full flex flex-col md:flex-row">
-        <article className="prose w-full ">
-          <PostBody {...post} />
-        </article>
-        <article className="w-full ">
-          <CodeBody {...post} />
-        </article>
-      </section>
+      <PostDetail post={post} />
     </Layout>
   );
 }

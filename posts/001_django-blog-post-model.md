@@ -116,7 +116,7 @@ class CustomUser(AbstractUser):
 
 [^2]
 
-### ERD
+## ERD
 
 ```viz
 digraph AppSchema {

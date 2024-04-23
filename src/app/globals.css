@@ -5,8 +5,7 @@
 .toc.dropdown-content ol {
   list-style-type: none;
   padding-left: 0;
-
-  width: 30rem;
+  width: 33rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -24,7 +23,7 @@
 }
 
 .toc.dropdown-content:has(> ol) ol {
-  height: 10rem;
+  height: 20rem;
 }
 
 .toc.dropdown-content li {
