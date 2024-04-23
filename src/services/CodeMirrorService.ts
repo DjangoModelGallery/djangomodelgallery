@@ -1,13 +1,13 @@
 // CodeMirrorService.ts
+import { Language } from "@/types/code/codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { markdown } from "@codemirror/lang-markdown";
 import { python } from "@codemirror/lang-python";
 import { indentOnInput } from "@codemirror/language";
 import { EditorState, Prec } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
+import { dot } from "@viz-js/lang-dot";
 import { basicSetup } from "codemirror";
-
-type Language = "python" | "javascript" | "markdown";
 
 export default class CodeMirrorService {
   private view: EditorView | null = null;
@@ -36,6 +36,8 @@ export default class CodeMirrorService {
         ? python()
         : language === "javascript"
         ? javascript()
+        : language === "dot"
+        ? dot()
         : markdown(),
     ];
 

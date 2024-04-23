@@ -1,3 +1,3 @@
-type Language = "python" | "javascript" | "markdown";
+type Language = "python" | "javascript" | "markdown" | "dot";
 
 export type { Language };

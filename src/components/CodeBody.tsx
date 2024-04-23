@@ -14,16 +14,22 @@ export default function CodeBody(postContent: Post) {
     containerRef,
   });
 
-  const { editorRef, getContent } = useCodeMirror(data, "python", () => {
+  const { editorRef, getContent } = useCodeMirror(data, "dot", () => {
     console.log("Command executed!");
   });
 
   return (
     <div className="sticky top-0">
-      <button onClick={zoomIn}>Zoom In</button>
-      <button onClick={zoomOut}>Zoom Out</button>
-      <button onClick={resetZoom}>Reset Zoom</button>
-      <p>Current Zoom Level: {zoomLevel.toFixed(2)}</p>
+      <button onClick={zoomIn} className="btn btn-sm btn-outline ">
+        Zoom In
+      </button>
+      <button onClick={zoomOut} className="btn btn-sm btn-outline ">
+        Zoom Out
+      </button>
+      <button onClick={resetZoom} className="btn btn-sm btn-outline ">
+        Reset Zoom
+      </button>
+      <p className="">Current Zoom Level: {zoomLevel.toFixed(2)}</p>
       <div className="relative">
         <button
           onClick={() => setOpen()}
