@@ -3,6 +3,11 @@ interface CodeBlock {
   code: string;
 }
 
+interface TabEditorBlock {
+  name: string;
+  code: string;
+}
+
 interface ParsedMarkdown {
   html: string;
   tableOfContents: string;
@@ -13,4 +18,4 @@ interface ParsedMarkdown {
   otherCodeBlocks: CodeBlock[];
 }
 
-export type { CodeBlock, ParsedMarkdown };
+export type { CodeBlock, ParsedMarkdown, TabEditorBlock };

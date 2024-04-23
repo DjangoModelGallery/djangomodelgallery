@@ -4,19 +4,40 @@ import useCodeMirrorWithTabs from "@/hooks/useCodeMirrorWithTabs";
 import { useToggle } from "@/hooks/useToggle";
 import useViz from "@/hooks/useViz";
 import { useZoomAndPan } from "@/hooks/useZoomAndPan";
+import { TabEditorBlock } from "@/types/code/markdown";
 import { Post } from "@/types/posts/posts";
 import { useMemo, useState } from "react";
 
 export default function CodeBody(postContent: Post) {
-  const TAB_DATA = useMemo(() => {
-    return postContent.pythonCodeBlocks.map((block) => block.code);
+  const TAB_DATA: TabEditorBlock[] = useMemo(() => {
+    return postContent.pythonCodeBlocks
+      .map((block) => {
+        const code = block.code.trim();
+        const firstLine = code.split("\n")[0];
+
+        if (
+          firstLine.startsWith("#") &&
+          firstLine.includes(">") &&
+          /\.\w+$/.test(firstLine)
+        ) {
+          const name = firstLine;
+          return { name, code };
+        }
+
+        return undefined;
+      })
+      .filter((block): block is TabEditorBlock => block !== undefined);
   }, [postContent.pythonCodeBlocks]);
+
   const [data, setData] = useState<string>(postContent.vizCodeBlocks[0].code);
+
   const [open, setOpen] = useToggle(false);
 
   const { containerRef } = useViz(postContent.vizCodeBlocks[0].code);
-  const { editorsRef, switchTab, getContents, currentTab } =
+  const { editorsRef, switchTab, getContents, currentTab, tabsList } =
     useCodeMirrorWithTabs(TAB_DATA, "python");
+
+  console.log("🚀 ~ CodeBody ~ TAB_DATA:", tabsList);
 
   const { zoomIn, zoomOut, resetZoom, zoomLevel } = useZoomAndPan({
     containerRef,
@@ -45,11 +66,21 @@ export default function CodeBody(postContent: Post) {
         >
           {open ? "hide" : "Show"}Code
         </button>
-        <p
-          className="z-50 text-white fixed bottom-0 right-0"
-          onClick={() => switchTab(1)}
-        >
-          {currentTab}
+        <div className="absolute top-1/2 left-5 z-50">
+          {tabsList.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => switchTab(index)}
+              className={`btn btn-sm ${
+                currentTab === index ? "btn-primary" : "btn-outline"
+              }`}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
+        <p className="z-50 text-white fixed bottom-0 right-0">
+          {tabsList[currentTab]?.name || ""}
         </p>
         <div
           className="h-[50vh] overflow-scroll w-full"
