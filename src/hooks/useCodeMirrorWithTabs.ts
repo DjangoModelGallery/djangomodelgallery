@@ -1,36 +1,35 @@
-// useCodeMirror.ts
-// TODO: 탭으로 만들기
+// useCodeMirrorWithTabs.ts
 import CodeMirrorService from "@/services/CodeMirrorService";
 import { Language } from "@/types/code/codemirror";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function useCodeMirrorWithTabs(
   initialDocs: string[],
-  language: Language,
-  onCommand: () => void
+  language: Language
 ) {
-  const editorRef = useRef<HTMLDivElement>(null);
+  const editorsRef = useRef<HTMLDivElement>(null);
   const serviceRef = useRef<CodeMirrorService | null>(null);
+  const [currentTab, setCurrentTab] = useState(0);
 
   useEffect(() => {
-    if (editorRef.current) {
-      serviceRef.current = new CodeMirrorService();
-      serviceRef.current.initialize(
-        editorRef.current,
-        initialDocs[0],
-        language,
-        onCommand
-      );
+    if (editorsRef.current) {
+      serviceRef.current = new CodeMirrorService(initialDocs, language);
+      serviceRef.current.initialize(editorsRef.current);
     }
 
     return () => {
       serviceRef.current?.destroy();
     };
-  }, [initialDocs, language, onCommand]);
+  }, [initialDocs, language]);
 
-  const getContent = () => {
+  const switchTab = (index: number) => {
+    setCurrentTab(index);
+    serviceRef.current?.switchDocument(index);
+  };
+
+  const getContents = () => {
     return serviceRef.current?.getContent() || "";
   };
 
-  return { editorRef, getContent };
+  return { editorsRef, switchTab, getContents, currentTab };
 }

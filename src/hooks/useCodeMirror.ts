@@ -13,19 +13,14 @@ export default function useCodeMirror(
 
   useEffect(() => {
     if (editorRef.current) {
-      serviceRef.current = new CodeMirrorService();
-      serviceRef.current.initialize(
-        editorRef.current,
-        initialDoc,
-        language,
-        onCommand
-      );
+      serviceRef.current = new CodeMirrorService([initialDoc], language);
+      serviceRef.current.initialize(editorRef.current);
     }
 
     return () => {
       serviceRef.current?.destroy();
     };
-  }, [initialDoc, language, onCommand]);
+  }, [initialDoc, language]);
 
   const getContent = () => {
     return serviceRef.current?.getContent() || "";
