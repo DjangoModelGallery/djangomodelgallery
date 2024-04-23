@@ -14,7 +14,7 @@ import toc from "markdown-it-toc-done-right";
  *
  * @example
  *
- * import { parseMarkdown } from "./parseMarkdownContents";
+ * import { parseMarkdownContents } from "./parseMarkdownContents";
  *
  * const markdown = `
  * # 제목
@@ -39,7 +39,7 @@ import toc from "markdown-it-toc-done-right";
  * console.log(tableOfContents); // 목차를 출력합니다.
  * console.log(footnotes); // 각주를 출력합니다.
  */
-export const parseMarkdown = (
+export const parseMarkdownContents = (
   markdownContent: string
 ): Partial<ParsedMarkdown> => {
   const md = new MarkdownIt({

@@ -25,24 +25,29 @@ import { RefObject, useEffect, useRef, useState } from "react";
  * }
  */
 export default function useViz(
-  initialGraph: Graph,
+  initialGraph: string,
   options?: any
 ): RefObject<HTMLDivElement> {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<SVGSVGElement | null>(null);
-  const serviceRef = useRef<VizService | null>(null);
 
   useEffect(() => {
-    serviceRef.current = new VizService();
+    const vizService = new VizService();
 
-    serviceRef.current
-      .renderSvg(initialGraph, options)
-      .then((svgElement) => {
+    const renderGraph = async () => {
+      try {
+        const svgElement = await vizService.renderSvg(
+          initialGraph as Graph,
+          options
+        );
         setSvg(svgElement);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("그래프 렌더링에 실패했습니다:", error);
-      });
+        // 사용자에게 적절한 피드백 제공
+      }
+    };
+
+    renderGraph();
   }, [initialGraph, options]);
 
   useEffect(() => {

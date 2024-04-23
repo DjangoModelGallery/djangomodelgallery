@@ -2,7 +2,7 @@
 
 import type { FrontmatterData } from "@/types/posts/frontmatters";
 import { Post } from "@/types/posts/posts";
-import { parseMarkdown } from "@/utils/parseMarkdownContents";
+import { parseMarkdown } from "@/utils/parseMarkdown";
 import fs from "fs/promises";
 import matter from "gray-matter";
 import path from "path";
@@ -34,10 +34,15 @@ export const getPost = cache(async (slug: string) => {
 
           return {
             frontmatter,
-            body: parsedContent.html,
+            body: (await parsedContent).html,
             title: frontmatter.title || "No Title",
             slug: postSlug,
-            tableOfContents: parsedContent.tableOfContents,
+            tableOfContents: (await parsedContent).tableOfContents,
+            footnotes: (await parsedContent).footnotes,
+            pythonCodeBlocks: (await parsedContent).pythonCodeBlocks,
+            vizCodeBlocks: (await parsedContent).vizCodeBlocks,
+            jsCodeBlocks: (await parsedContent).jsCodeBlocks,
+            otherCodeBlocks: (await parsedContent).otherCodeBlocks,
           } as Post;
         }
 

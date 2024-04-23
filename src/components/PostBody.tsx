@@ -1,4 +1,4 @@
-import TableOfContents from "@/common/TableOfContents";
+import TableOfContents from "@/components/TableOfContents";
 import { Post } from "@/types/posts/posts";
 import { format } from "date-fns";
 import MarkdownIt from "markdown-it";

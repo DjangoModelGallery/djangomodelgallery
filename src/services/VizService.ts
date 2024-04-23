@@ -10,14 +10,13 @@ export default class VizService {
     });
   }
 
-  renderSvg(graph: Graph, options?: any): Promise<SVGSVGElement> {
-    return new Promise((resolve, reject) => {
-      try {
-        const svgElement = this.viz.renderSVGElement(graph, options);
-        resolve(svgElement);
-      } catch (error) {
-        reject(error);
-      }
-    });
+  async renderSvg(graph: Graph, options?: any): Promise<SVGSVGElement> {
+    try {
+      const viz = await instance();
+      const svgElement = viz.renderSVGElement(graph, options);
+      return svgElement;
+    } catch (error) {
+      throw error;
+    }
   }
 }
