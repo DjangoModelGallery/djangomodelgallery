@@ -1,4 +1,5 @@
 // app/posts/page.tsx
+"use server";
 import Layout from "@/components/Layout";
 import PostList from "@/components/PostList";
 import getPostList from "./postList.server";

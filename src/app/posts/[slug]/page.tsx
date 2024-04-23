@@ -14,9 +14,12 @@ export default async function DetailPage({
 
   return (
     <Layout>
-      <article className="prose">
-        <PostBody {...post} />
-      </article>
+      <section className="w-full">
+        <article className="prose w-full md:w-1/2 ">
+          <PostBody {...post} />
+        </article>
+        <article className="w-full md:w-1/2">코드블록</article>
+      </section>
     </Layout>
   );
 }

@@ -39,7 +39,7 @@ export default function Header() {
                 <Link
                   href={
                     category.categoryName !== "all"
-                      ? `posts/?category=${formatQuery(category.categoryName)}`
+                      ? `/posts/?category=${formatQuery(category.categoryName)}`
                       : "/posts"
                   }
                 >

@@ -5,6 +5,7 @@ interface Post {
   body: string;
   title: string;
   slug: string;
+  tableOfContents: string;
 }
 
 interface CategoryItem {

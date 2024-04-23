@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.toc.dropdown-content ol {
+  list-style-type: none;
+  padding-left: 0;
+
+  width: 30rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.toc.dropdown-content ol {
+  counter-reset: list-item;
+}
+.toc.dropdown-content li {
+  color: white;
+  display: block;
+  counter-increment: list-item;
+}
+.toc.dropdown-content li:before {
+  content: counters(list-item, ".") " ";
+}
+
+.toc.dropdown-content:has(> ol) ol {
+  height: 10rem;
+}
+
+.toc.dropdown-content li {
+  padding: 0.1rem;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s;
+}
+
+.toc.dropdown-content li:hover {
+}

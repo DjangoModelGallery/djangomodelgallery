@@ -1,3 +1,4 @@
+import TableOfContents from "@/common/TableOfContents";
 import { Post } from "@/types/posts/posts";
 import { format } from "date-fns";
 import MarkdownIt from "markdown-it";
@@ -9,6 +10,10 @@ export default function PostBody(postContent: Post) {
 
   return (
     <article className="post overflow-x-scroll">
+      <div className="fixed bottom-5 left-5">
+        <TableOfContents toc={postContent.tableOfContents} />
+      </div>
+
       <div className="post-meta">
         <time dateTime={new Date(date).toISOString()}>
           {format(new Date(date), "yyyy년 M월 d일")}

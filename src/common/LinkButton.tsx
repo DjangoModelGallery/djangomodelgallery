@@ -1,18 +1,22 @@
 // Link.tsx
+import Link from "next/link";
 import { ReactNode } from "react";
-import tw, { styled } from "twin.macro";
 
 interface LinkProps {
   callback: () => void;
   children: ReactNode;
 }
 
-const StyledButton = styled.button`
-  ${tw`no-underline text-left text-black dark:text-white px-4 py-2`}
-`;
-
-const Link = ({ callback, children }: LinkProps) => {
-  return <StyledButton onClick={callback}>{children}</StyledButton>;
+const LinkButton = ({ callback, children }: LinkProps) => {
+  return (
+    <Link
+      href={""}
+      className="no-underline text-left text-black dark:text-white px-4 py-2"
+      onClick={callback}
+    >
+      {children}
+    </Link>
+  );
 };
 
-export default Link;
+export default LinkButton;
