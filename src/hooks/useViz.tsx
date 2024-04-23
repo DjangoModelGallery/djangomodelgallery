@@ -1,35 +1,16 @@
 import VizService from "@/services/VizService";
 import { Graph } from "@viz-js/viz";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
-/**
- * 주어진 그래프를 SVG로 렌더링하고, 이를 포함하는 컨테이너 요소에 대한 참조를 반환하는 훅입니다.
- *
- * @param initialGraph 렌더링할 그래프입니다.
- * @param options 선택적으로 Viz 렌더러에 대한 옵션을 지정할 수 있습니다.
- *
- * @returns 컨테이너 요소에 대한 참조를 반환합니다.
- *
- * @example
- *
- * import { Graph } from "@viz-js/viz";
- * import useViz from "@/hooks/useViz";
- *
- * function MyComponent() {
- *   const graph = new Graph();
- *   // ... 그래프에 노드와 엣지를 추가 ...
- *
- *   const containerRef = useViz(graph);
- *
- *   return <div ref={containerRef} />;
- * }
- */
 export default function useViz(
   initialGraph: string,
   options?: any
-): RefObject<HTMLDivElement> {
+): {
+  containerRef: RefObject<HTMLDivElement>;
+  svgRef: RefObject<SVGSVGElement>;
+} {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [svg, setSvg] = useState<SVGSVGElement | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const vizService = new VizService();
@@ -40,22 +21,18 @@ export default function useViz(
           initialGraph as Graph,
           options
         );
-        setSvg(svgElement);
+        if (containerRef.current) {
+          containerRef.current.innerHTML = ""; // 기존 내용을 비우고
+          containerRef.current.appendChild(svgElement); // 새로운 SVG 추가
+          // 여기서는 svgRef.current에 직접 할당하지 않고, DOM에 SVG가 추가되었음을 가정합니다.
+        }
       } catch (error) {
         console.error("그래프 렌더링에 실패했습니다:", error);
-        // 사용자에게 적절한 피드백 제공
       }
     };
 
     renderGraph();
   }, [initialGraph, options]);
 
-  useEffect(() => {
-    if (containerRef.current && svg) {
-      containerRef.current.innerHTML = "";
-      containerRef.current.appendChild(svg);
-    }
-  }, [svg]);
-
-  return containerRef;
+  return { containerRef, svgRef };
 }
