@@ -2,6 +2,7 @@
 
 import Layout from "@/components/Layout";
 import PostDetail from "@/components/PostDetail";
+import { Suspense } from "react";
 import postDetailServer from "./postDetail.server";
 
 export default async function DetailPage({
@@ -15,7 +16,9 @@ export default async function DetailPage({
 
   return (
     <Layout>
-      <PostDetail post={post} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PostDetail post={post} />
+      </Suspense>
     </Layout>
   );
 }
