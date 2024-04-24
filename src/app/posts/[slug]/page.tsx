@@ -2,6 +2,7 @@
 
 import Layout from "@/components/Layout";
 import PostDetail from "@/components/PostDetail";
+import { getPosts } from "@/lib/getPosts";
 import { Suspense } from "react";
 import postDetailServer from "./postDetail.server";
 
@@ -21,4 +22,10 @@ export default async function DetailPage({
       </Suspense>
     </Layout>
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+
+  return posts.map((post) => ({ slug: post?.slug }));
 }
