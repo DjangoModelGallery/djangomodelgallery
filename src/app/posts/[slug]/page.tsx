@@ -2,18 +2,19 @@
 
 import Layout from "@/components/Layout";
 import PostDetail from "@/components/PostDetail";
+import { getPost } from "@/lib/getPost";
 import { getPosts } from "@/lib/getPosts";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import postDetailServer from "./postDetail.server";
 
-export default async function DetailPage({
-  params,
+export default async function PostDetailPage({
+  params: { slug },
 }: {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 }) {
-  const post = await postDetailServer(params.slug);
+  const post = await getPost(slug);
+
+  if (!post) return notFound();
 
   return (
     <Layout>
@@ -27,5 +28,7 @@ export default async function DetailPage({
 export async function generateStaticParams() {
   const posts = await getPosts();
 
-  return posts.map((post) => ({ slug: post?.slug }));
+  return posts.map((post) => ({
+    slug: post?.slug,
+  }));
 }
