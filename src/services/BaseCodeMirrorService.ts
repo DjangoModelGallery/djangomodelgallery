@@ -6,6 +6,7 @@ import { python } from "@codemirror/lang-python";
 import { EditorState, Extension } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
 import { dot } from "@viz-js/lang-dot";
+import { gruvboxDark } from "cm6-theme-gruvbox-dark";
 import { basicSetup } from "codemirror";
 
 export abstract class BaseCodeMirrorService {
@@ -30,6 +31,7 @@ export abstract class BaseCodeMirrorService {
   initialize(element: HTMLDivElement) {
     this.view = new EditorView({
       state: this.getInitialState(),
+      extensions: gruvboxDark,
       parent: element,
     });
   }

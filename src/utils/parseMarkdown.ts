@@ -1,7 +1,6 @@
-// parseMarkdown.ts
-
 import { CodeBlock, ParsedMarkdown } from "@/types/code/markdown";
 import MarkdownIt from "markdown-it";
+import anchor from "markdown-it-anchor";
 import footnote from "markdown-it-footnote";
 import toc from "markdown-it-toc-done-right";
 import { cache } from "react";
@@ -19,7 +18,12 @@ export const parseMarkdown = cache(
         return "";
       },
     })
-      .use(toc)
+      .use(anchor, {
+        permalink: true,
+        permalinkBefore: true,
+        permalinkSymbol: "§",
+      })
+      .use(toc, { containerClass: "table-of-contents", listType: "ol" })
       .use(footnote);
 
     const html = md.render(markdownContent);

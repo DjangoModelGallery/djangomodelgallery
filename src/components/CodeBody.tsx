@@ -52,7 +52,7 @@ export default function CodeBody(postContent: Post) {
     containerRef,
   });
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 bg-slate-700">
       <button onClick={zoomIn} className="btn btn-sm btn-outline ">
         Zoom In
       </button>
@@ -98,13 +98,13 @@ export default function CodeBody(postContent: Post) {
         ></div>
 
         <div
-          className="h-[50vh] bg-gray-800 overflow-scroll w-full z-50"
+          className="h-[50vh] overflow-scroll w-full z-50"
           ref={editorsRef}
         ></div>
         {open && (
           <div
             ref={editorRef}
-            className="w-full h-[50vh] absolute top-0 bg-gray-800 rounded-lg overflow-scroll "
+            className="w-full h-[50vh] absolute top-0 rounded-lg overflow-scroll bg-stone-800"
           ></div>
         )}
       </div>
