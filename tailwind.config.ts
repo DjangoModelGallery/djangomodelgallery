@@ -21,7 +21,7 @@ const config: Config = {
         DEFAULT: {
           css: {
             color: "#333",
-            backgroundColor: "#ccc",
+            backgroundColor: "transparent",
             h1: {
               color: "lime",
             },

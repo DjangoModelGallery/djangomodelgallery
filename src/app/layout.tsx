@@ -9,8 +9,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className=" bg-black h-full scrollbar-hide">
-      <body className={`${inter.className} m-0 p-0 bg-black `}>{children}</body>
+    <html lang="ko" className="h-full scrollbar-hide ">
+      <body className={`${inter.className} m-0 p-0  `}>{children}</body>
     </html>
   );
 }

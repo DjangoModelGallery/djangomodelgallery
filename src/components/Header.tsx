@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CATEGORIES_ARRAY } from "../../constants/categories";
 import { NAVBAR_TITLE, NAVBAR_TITLE_SHORT } from "../../constants/navigation";
+import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   const [isopen, toggle] = useToggle(false);
@@ -57,6 +58,7 @@ export default function Header() {
         </div>
       </div>
       <div className="navbar-center">
+        <DarkModeToggle />
         <Link href={"/"} className="btn btn-ghost text-xl">
           {width > breakpoints.md ? NAVBAR_TITLE : NAVBAR_TITLE_SHORT}
         </Link>
