@@ -1,5 +1,6 @@
 // useCodeMirrorWithTabs.ts
-import CodeMirrorService from "@/services/CodeMirrorService";
+import ArrayCodeMirrorService from "@/services/ArrayCodeMirrorsService";
+
 import { Language } from "@/types/code/codemirror";
 import { TabEditorBlock } from "@/types/code/markdown";
 import { useEffect, useRef, useState } from "react";
@@ -9,7 +10,7 @@ export default function useCodeMirrorWithTabs(
   language: Language
 ) {
   const editorsRef = useRef<HTMLDivElement>(null);
-  const serviceRef = useRef<CodeMirrorService | null>(null);
+  const servicesRef = useRef<ArrayCodeMirrorService | null>(null);
   const [currentTab, setCurrentTab] = useState(0);
 
   const tabs = initialDocs.map((doc) => doc.code);
@@ -21,13 +22,13 @@ export default function useCodeMirrorWithTabs(
 
   useEffect(() => {
     if (editorsRef.current) {
-      serviceRef.current = new CodeMirrorService(tabs, language);
-      serviceRef.current.initialize(editorsRef.current);
-      serviceRef.current.switchDocument(currentTab);
+      servicesRef.current = new ArrayCodeMirrorService(tabs, language);
+      servicesRef.current.initialize(editorsRef.current);
+      servicesRef.current.switchDocument(currentTab);
     }
 
     return () => {
-      serviceRef.current?.destroy();
+      servicesRef.current?.destroy();
     };
   }, [tabs, language, currentTab]);
 
@@ -36,7 +37,7 @@ export default function useCodeMirrorWithTabs(
   };
 
   const getContents = () => {
-    return serviceRef.current?.getContent() || "";
+    return servicesRef.current?.getContent() || "";
   };
 
   return { editorsRef, switchTab, getContents, currentTab, tabsList };

@@ -6,7 +6,7 @@ import useViz from "@/hooks/useViz";
 import { useZoomAndPan } from "@/hooks/useZoomAndPan";
 import { TabEditorBlock } from "@/types/code/markdown";
 import { Post } from "@/types/posts/posts";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 export default function CodeBody(postContent: Post) {
   const TAB_DATA: TabEditorBlock[] = useMemo(() => {
@@ -29,23 +29,24 @@ export default function CodeBody(postContent: Post) {
       .filter((block): block is TabEditorBlock => block !== undefined);
   }, [postContent.pythonCodeBlocks]);
 
-  const [data, setData] = useState<string>(postContent.vizCodeBlocks[0].code);
-
   const [open, setOpen] = useToggle(false);
 
-  const { containerRef } = useViz(postContent.vizCodeBlocks[0].code);
+  const { containerRef } = useViz(postContent.vizCodeBlocks[0]?.code);
+
   const { editorsRef, switchTab, getContents, currentTab, tabsList } =
     useCodeMirrorWithTabs(TAB_DATA, "python");
-
-  console.log("🚀 ~ CodeBody ~ TAB_DATA:", tabsList);
 
   const { zoomIn, zoomOut, resetZoom, zoomLevel } = useZoomAndPan({
     containerRef,
   });
 
-  const { editorRef, getContent } = useCodeMirror(data, "dot", () => {
-    console.log("Command executed!");
-  });
+  const { editorRef, getContent } = useCodeMirror(
+    postContent.vizCodeBlocks[0]?.code || "",
+    "dot",
+    () => {
+      console.log("Command executed!");
+    }
+  );
 
   return (
     <div className="sticky top-0">
@@ -83,12 +84,12 @@ export default function CodeBody(postContent: Post) {
           {tabsList[currentTab]?.name || ""}
         </p>
         <div
-          className="h-[50vh] overflow-scroll w-full"
+          className="h-[50vh] overflow-scroll w-full bg-white"
           ref={containerRef}
         ></div>
 
         <div
-          className="h-[50vh]  overflow-scroll w-full z-50"
+          className="h-[50vh] bg-gray-800 overflow-scroll w-full z-50"
           ref={editorsRef}
         ></div>
         {open && (

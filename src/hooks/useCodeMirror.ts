@@ -1,5 +1,5 @@
 // useCodeMirror.ts
-import CodeMirrorService from "@/services/CodeMirrorService";
+import StringCodeMirrorService from "@/services/StringCodeMirrorService";
 import { Language } from "@/types/code/codemirror";
 import { useEffect, useRef } from "react";
 
@@ -9,18 +9,22 @@ export default function useCodeMirror(
   onCommand: () => void
 ) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const serviceRef = useRef<CodeMirrorService | null>(null);
+  const serviceRef = useRef<StringCodeMirrorService | null>(null);
 
   useEffect(() => {
     if (editorRef.current) {
-      serviceRef.current = new CodeMirrorService([initialDoc], language);
+      serviceRef.current = new StringCodeMirrorService(
+        initialDoc,
+        language,
+        onCommand
+      );
       serviceRef.current.initialize(editorRef.current);
     }
 
     return () => {
       serviceRef.current?.destroy();
     };
-  }, [initialDoc, language]);
+  }, [initialDoc, language, onCommand]);
 
   const getContent = () => {
     return serviceRef.current?.getContent() || "";

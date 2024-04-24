@@ -1,4 +1,4 @@
-// CodeMirrorService.ts
+// BaseCodeMirrorService.ts
 import { Language } from "@/types/code/codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { markdown } from "@codemirror/lang-markdown";
@@ -8,37 +8,30 @@ import { EditorView, keymap } from "@codemirror/view";
 import { dot } from "@viz-js/lang-dot";
 import { basicSetup } from "codemirror";
 
-export default class CodeMirrorService {
-  private view: EditorView | null = null;
-  private states: EditorState[];
-  private currentIndex: number;
+export abstract class BaseCodeMirrorService {
+  protected view: EditorView | null = null;
 
-  constructor(docs: string[], language: Language) {
-    this.states = docs.map((doc) => this.createEditorState(doc, language));
-    this.currentIndex = 0;
-  }
-
-  private createEditorState(doc: string, language: Language): EditorState {
+  protected createEditorState(doc: string, language: Language): EditorState {
     const extensions: Extension[] = [
       basicSetup,
       this.getLanguageExtension(language),
-      keymap.of([{ key: "Mod-Enter", run: this.onCommand.bind(this) }]),
+      keymap.of([
+        {
+          key: "Mod-Enter",
+          run: (view: EditorView) => {
+            this.onCommand();
+            return true;
+          },
+        },
+      ]),
     ];
     return EditorState.create({ doc, extensions });
   }
-
   initialize(element: HTMLDivElement) {
-    if (this.states.length === 0) return;
     this.view = new EditorView({
-      state: this.states[this.currentIndex],
+      state: this.getInitialState(),
       parent: element,
     });
-  }
-
-  switchDocument(index: number) {
-    if (!this.view || index >= this.states.length || index < 0) return;
-    this.currentIndex = index;
-    this.view.setState(this.states[index]);
   }
 
   destroy() {
@@ -50,7 +43,7 @@ export default class CodeMirrorService {
     return this.view.state.doc.toString();
   }
 
-  private getLanguageExtension(language: Language): Extension {
+  protected getLanguageExtension(language: Language): Extension {
     switch (language) {
       case "javascript":
         return javascript();
@@ -65,8 +58,11 @@ export default class CodeMirrorService {
     }
   }
 
-  private onCommand() {
-    console.log("Command Executed");
-    return true;
+  protected onCommand(): () => void {
+    return () => {
+      // 함수 본문
+    };
   }
+
+  protected abstract getInitialState(): EditorState;
 }
