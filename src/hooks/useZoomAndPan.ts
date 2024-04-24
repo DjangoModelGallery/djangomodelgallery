@@ -10,6 +10,7 @@ interface UseZoomAndPanReturn {
   zoomIn: () => void;
   zoomOut: () => void;
   resetZoom: () => void;
+  resetPan: () => void; // Pan 초기화 함수 추가
   zoomLevel: number;
 }
 
@@ -31,12 +32,14 @@ export const useZoomAndPan = ({
 
             const zoom = d3
               .zoom<SVGElement, unknown>()
-              .scaleExtent([1, 8])
+              .filter((event) => (event.type === "wheel" ? event.altKey : true))
+              .scaleExtent([0.5, 8]) // 최소 줌 레벨을 0.5로 설정
               .translateExtent([
                 [0, 0],
                 [node.clientWidth, node.clientHeight],
               ])
               .on("zoom", (event: d3.D3ZoomEvent<SVGElement, unknown>) => {
+                // if (!event.sourceEvent || !event.sourceEvent.altKey) return; // Alt 키 체크
                 setZoomLevel(event.transform.k);
                 const transform = event.transform;
                 svg.attr(
@@ -61,24 +64,28 @@ export const useZoomAndPan = ({
 
   const zoomIn = () => {
     svgRef.current &&
-      d3
-        .select(svgRef.current)
-        .transition()
-        .call(zoomRef.current!.scaleBy, 1.1);
+      d3.select(svgRef.current).transition().call(zoomRef.current.scaleBy, 1.1);
   };
 
   const zoomOut = () => {
     svgRef.current &&
-      d3
-        .select(svgRef.current)
-        .transition()
-        .call(zoomRef.current!.scaleBy, 0.9);
+      d3.select(svgRef.current).transition().call(zoomRef.current.scaleBy, 0.9);
   };
 
   const resetZoom = () => {
     svgRef.current &&
-      d3.select(svgRef.current).transition().call(zoomRef.current!.scaleTo, 1);
+      d3.select(svgRef.current).transition().call(zoomRef.current.scaleTo, 1);
   };
 
-  return { zoomIn, zoomOut, resetZoom, zoomLevel };
+  const resetPan = () => {
+    if (svgRef.current) {
+      const currentZoom = zoomRef.current.transform;
+      const updatedTransform = d3.zoomIdentity.scale(zoomLevel);
+      d3.select(svgRef.current)
+        .transition()
+        .call(zoomRef.current.transform, updatedTransform);
+    }
+  };
+
+  return { zoomIn, zoomOut, resetZoom, resetPan, zoomLevel };
 };

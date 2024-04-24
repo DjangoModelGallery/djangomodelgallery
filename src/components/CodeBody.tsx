@@ -48,7 +48,7 @@ export default function CodeBody(postContent: Post) {
   );
 
   const { containerRef } = useViz(data);
-  const { zoomIn, zoomOut, resetZoom, zoomLevel } = useZoomAndPan({
+  const { zoomIn, zoomOut, resetZoom, resetPan, zoomLevel } = useZoomAndPan({
     containerRef,
   });
   return (
@@ -62,7 +62,13 @@ export default function CodeBody(postContent: Post) {
       <button onClick={resetZoom} className="btn btn-sm btn-outline ">
         Reset Zoom
       </button>
+      <button onClick={resetPan} className="btn btn-sm btn-outline ">
+        Reset Pan
+      </button>
       <p className="">Current Zoom Level: {zoomLevel.toFixed(2)}</p>
+      <p className="">
+        [alt] + scroll 로 zoom 레벨 조정, 드래그로 panning 조정
+      </p>
       <div className="relative z-50">
         <button
           onClick={() => setOpen()}

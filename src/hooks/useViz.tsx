@@ -23,10 +23,8 @@ export default function useViz(
         );
 
         if (containerRef.current) {
-          containerRef.current.innerHTML = ""; // 기존 내용을 비우고
-          containerRef.current.appendChild(svgElement); // 새로운 SVG 추가
-
-          // 여기서는 svgRef.current에 직접 할당하지 않고, DOM에 SVG가 추가되었음을 가정합니다.
+          containerRef.current.innerHTML = "";
+          containerRef.current.appendChild(svgElement);
         }
       } catch (error) {
         console.error("그래프 렌더링에 실패했습니다:", error);
