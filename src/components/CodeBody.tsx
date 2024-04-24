@@ -6,9 +6,11 @@ import useViz from "@/hooks/useViz";
 import { useZoomAndPan } from "@/hooks/useZoomAndPan";
 import { TabEditorBlock } from "@/types/code/markdown";
 import { Post } from "@/types/posts/posts";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export default function CodeBody(postContent: Post) {
+  const [data, setData] = useState<string>(postContent.vizCodeBlocks[0]?.code);
+
   const TAB_DATA: TabEditorBlock[] = useMemo(() => {
     return postContent.pythonCodeBlocks
       .map((block) => {
@@ -31,23 +33,24 @@ export default function CodeBody(postContent: Post) {
 
   const [open, setOpen] = useToggle(false);
 
-  const { containerRef } = useViz(postContent.vizCodeBlocks[0]?.code);
-
   const { editorsRef, switchTab, getContents, currentTab, tabsList } =
     useCodeMirrorWithTabs(TAB_DATA, "python");
-
-  const { zoomIn, zoomOut, resetZoom, zoomLevel } = useZoomAndPan({
-    containerRef,
-  });
-
   const { editorRef, getContent } = useCodeMirror(
-    postContent.vizCodeBlocks[0]?.code || "",
+    data,
     "dot",
     () => {
       console.log("Command executed!");
-    }
+    },
+    (value) => {
+      setData(value);
+    },
+    open
   );
 
+  const { containerRef } = useViz(data);
+  const { zoomIn, zoomOut, resetZoom, zoomLevel } = useZoomAndPan({
+    containerRef,
+  });
   return (
     <div className="sticky top-0">
       <button onClick={zoomIn} className="btn btn-sm btn-outline ">

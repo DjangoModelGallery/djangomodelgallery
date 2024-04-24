@@ -21,9 +21,11 @@ export default function useViz(
           initialGraph as Graph,
           options
         );
+
         if (containerRef.current) {
           containerRef.current.innerHTML = ""; // 기존 내용을 비우고
           containerRef.current.appendChild(svgElement); // 새로운 SVG 추가
+
           // 여기서는 svgRef.current에 직접 할당하지 않고, DOM에 SVG가 추가되었음을 가정합니다.
         }
       } catch (error) {
