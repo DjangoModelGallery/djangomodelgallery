@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   basePath: "/github-pages",
-  output: "standalone",
+  output: "export",
 };
 
 export default nextConfig;
