@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Header from "./Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -7,6 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <section className="min-h-screen mx-auto scrollbar-hide dark:bg-black bg-white pb-12">
         {children}
       </section>
+      <Footer />
     </>
   );
 }

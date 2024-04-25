@@ -26,4 +26,7 @@ const NAVBAR_ITEMS = [
 const NAVBAR_TITLE = "Django Model Gallery";
 const NAVBAR_TITLE_SHORT = "DMG";
 
-export { NAVBAR_ITEMS, NAVBAR_TITLE, NAVBAR_TITLE_SHORT };
+const FOOTER_TITLE =
+  "Copyright © 2024\nAll right reserved by Django Model Gallery";
+
+export { FOOTER_TITLE, NAVBAR_ITEMS, NAVBAR_TITLE, NAVBAR_TITLE_SHORT };
