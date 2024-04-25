@@ -49,7 +49,10 @@ export default function Header() {
                   }
                 >
                   <Image
-                    src={item?.icon || "/assets/icons/blog.svg"}
+                    src={
+                      item?.icon ||
+                      `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/blog.svg`
+                    }
                     alt={item.name}
                     width={22}
                     height={22}
@@ -74,7 +77,10 @@ export default function Header() {
                   }
                 >
                   <Image
-                    src={category?.icon || "/assets/icons/blog.svg"}
+                    src={
+                      category?.icon ||
+                      `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/blog.svg`
+                    }
                     alt={category.title}
                     width={22}
                     height={22}

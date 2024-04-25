@@ -92,7 +92,7 @@ const CATEGORIES: Category = {
     categoryName: "shopping",
     title: "쇼핑",
     description: "쇼핑 관련한 정보를 담은 카테고리",
-    icon: "/assets/icons/star.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/star.svg",
   },
   // ...
 };

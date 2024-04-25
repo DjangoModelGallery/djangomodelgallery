@@ -8,19 +8,19 @@ const NAVBAR_ITEMS = [
     name: "Home",
     title: "홈",
     description: "홈페이지로 이동하는 링크",
-    icon: "/assets/icons/home.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/home.svg`,
   },
   {
     name: "About",
     title: "소개",
     description: "프로젝트에 대한 정보를 담은 페이지로 이동하는 링크",
-    icon: "/assets/icons/about.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/about.svg`,
   },
   //   {
   //     name: "Contact",
   //     title: "연락처",
   //     description: "연락처 정보를 담은 페이지로 이동하는 링크",
-  //     icon: "/assets/icons/contact.svg",
+  //     icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/contact.svg",
   //   },
 ];
 const NAVBAR_TITLE = "Django Model Gallery";

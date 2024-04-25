@@ -21,27 +21,27 @@ const CATEGORIES: Category = {
     categoryName: "all",
     title: "전체",
     description: "모든 카테고리에 대한 정보를 담은 카테고리",
-    icon: "/assets/icons/all.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/all.svg`,
   },
   shopping: {
     categoryName: "shopping",
     title: "쇼핑",
     description: "쇼핑 관련한 정보를 담은 카테고리",
-    icon: "/assets/icons/star.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/star.svg`,
   },
 
   blog: {
     categoryName: "blog",
     title: "블로그",
     description: "블로그 관련한 정보를 담은 카테고리",
-    icon: "/assets/icons/blog.svg",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/blog.svg`,
   },
 
   accounts: {
     categoryName: "accounts",
     title: "계정",
     description: "계정 관련한 정보를 담은 카테고리",
-    icon: "/assets/icons/people.png",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/people.png`,
   },
 
   logos: {
