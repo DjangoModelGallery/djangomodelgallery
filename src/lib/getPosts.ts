@@ -5,8 +5,8 @@ import matter from "gray-matter";
 import path from "path";
 import { cache } from "react";
 
-export const getPosts = cache(async () => {
-  const postsDirectory = path.resolve(process.cwd(), "./posts");
+export const getPosts = cache(async (folderName: string = "posts") => {
+  const postsDirectory = path.resolve(process.cwd(), folderName);
   const posts = await fs.readdir(postsDirectory);
 
   return Promise.all(
@@ -24,7 +24,7 @@ export const getPosts = cache(async () => {
         const frontmatter = data as FrontmatterData;
 
         // slug 생성
-        const slug = frontmatter.fileName.split("_")[0];
+        const slug = frontmatter.fileName?.replace(/\.md$/, "");
 
         return {
           frontmatter,
