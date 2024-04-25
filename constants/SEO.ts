@@ -27,6 +27,29 @@ export const LOOT_LAYOUT_METADATA = {
   },
 };
 
+export const LOOT_ABOUT_METADATA = {
+  title: `About | About us`,
+  description: "DMG, All Models can be founded here.",
+  openGraph: {
+    title: "About",
+    description: "DMG, All Models can be founded here.",
+    siteName: "DMG",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "DMG",
+      },
+    ],
+  },
+  icons: {
+    shortcut: "",
+  },
+};
+
 export const LOOT_POSTS_METADATA = {
   title: `Posts | DMG Posts`,
   description: "DMG, All Models can be founded here.",
