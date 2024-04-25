@@ -73,6 +73,10 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Setup Environment Variables
+        run: |
+          echo "NEXT_PUBLIC_BASE_PATH=/github-pages" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_OUTPUT_MODE=export" >> $GITHUB_ENV
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
