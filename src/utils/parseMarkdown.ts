@@ -19,8 +19,8 @@ export const parseMarkdown = cache(
       },
     })
       .use(anchor, {
-        permalink: true,
         permalinkBefore: true,
+        permalinkClass: "header-anchor",
         permalinkSymbol: "§",
       })
       .use(toc, { containerClass: "table-of-contents", listType: "ol" })

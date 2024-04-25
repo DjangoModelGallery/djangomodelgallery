@@ -48,8 +48,8 @@ export const parseMarkdownContents = (
     typographer: true,
   })
     .use(anchor, {
-      permalink: true,
       permalinkBefore: true,
+      permalinkClass: "header-anchor",
       permalinkSymbol: "§",
     })
     .use(toc)
