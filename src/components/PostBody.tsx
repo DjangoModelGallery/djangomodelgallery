@@ -22,11 +22,15 @@ export default function PostBody(postContent: Post) {
         <span>{category}</span>
       </div>
       <div className="post-tags">
-        {tags.map((tag: string) => (
-          <span key={tag} className="post-tag">
-            #{tag}
-          </span>
-        ))}
+        {tags && tags.length ? (
+          tags.map((tag: string) => (
+            <span key={tag} className="post-tag">
+              #{tag}
+            </span>
+          ))
+        ) : (
+          <p>태그가 없습니다.</p>
+        )}
       </div>
       <div
         className="post-content prose"

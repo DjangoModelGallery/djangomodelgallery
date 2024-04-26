@@ -7,7 +7,13 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 
-function PostList({ posts }: { posts: (Post | null)[] }) {
+function PostList({
+  posts,
+  path = "posts",
+}: {
+  posts: (Post | null)[];
+  path?: string;
+}) {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
 
@@ -27,7 +33,7 @@ function PostList({ posts }: { posts: (Post | null)[] }) {
           (post: Post | null) =>
             post && (
               <li key={post.slug}>
-                <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                <Link href={`/${path}/${post.slug}`}>{post.title}</Link>
               </li>
             )
         )}

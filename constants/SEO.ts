@@ -27,6 +27,29 @@ export const LOOT_LAYOUT_METADATA = {
   },
 };
 
+export const LOOT_CONTRIBUTE_METADATA = {
+  title: `Guide | Contribute to DMG`,
+  description: "DMG, All Models can be founded here.",
+  openGraph: {
+    title: "Contribute",
+    description: "DMG, All Models can be founded here.",
+    siteName: "DMG",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "",
+        width: 800,
+        height: 600,
+        alt: "DMG",
+      },
+    ],
+  },
+  icons: {
+    shortcut: "",
+  },
+};
+
 export const LOOT_ABOUT_METADATA = {
   title: `About | About us`,
   description: "DMG, All Models can be founded here.",
@@ -71,6 +94,18 @@ export const LOOT_POSTS_METADATA = {
   icons: {
     shortcut: "",
   },
+};
+
+export const LOOT_CONTRIBUTE_DETAIL_METADATA = (postDetail: Post | null) => {
+  return {
+    title: postDetail?.title,
+    description: `${postDetail?.frontmatter.title} | Django Model Gallery.`,
+    openGraph: {
+      title: postDetail?.title,
+      description: `${postDetail?.frontmatter.title} | Django Model Gallery.`,
+      type: "website",
+    },
+  };
 };
 
 export const LOOT_POST_DETAIL_METADATA = (postDetail: Post | null) => {

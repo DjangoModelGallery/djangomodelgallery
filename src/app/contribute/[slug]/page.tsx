@@ -1,6 +1,7 @@
 // posts/[slug]/page.tsx
 
 import Layout from "@/components/Layout";
+import PostBody from "@/components/PostBody";
 
 import { getPost } from "@/lib/getPost";
 import { getPosts } from "@/lib/getPosts";
@@ -15,21 +16,21 @@ export default async function PostDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await getPost(slug);
+  const post = await getPost(slug, "contribute");
 
   if (!post) return notFound();
 
   return (
     <Layout>
       <Suspense fallback={<div>Loading...</div>}>
-        <PostDetail post={post} />
+        <PostBody {...post} />
       </Suspense>
     </Layout>
   );
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
+  const posts = await getPosts("contribute");
   return posts.map((post) => ({
     slug: post?.slug,
   }));
