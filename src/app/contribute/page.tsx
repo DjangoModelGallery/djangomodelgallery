@@ -1,4 +1,4 @@
-// app/about/page.tsx
+// app/contribute/page.tsx
 import Layout from "@/components/Layout";
 import PostBody from "@/components/PostBody";
 import PostList from "@/components/PostList";

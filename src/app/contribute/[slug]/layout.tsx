@@ -1,3 +1,5 @@
+// contribute/[slug]/layout.tsx
+
 import { getPost } from "@/lib/getPost";
 import { Metadata } from "next";
 import { LOOT_CONTRIBUTE_DETAIL_METADATA } from "../../../../constants/SEO";

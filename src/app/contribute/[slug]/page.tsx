@@ -1,5 +1,4 @@
-// posts/[slug]/page.tsx
-
+// contribute/[slug]/page.tsx
 import Layout from "@/components/Layout";
 import PostBody from "@/components/PostBody";
 

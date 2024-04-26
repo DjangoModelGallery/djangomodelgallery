@@ -1,3 +1,7 @@
+/**
+ * @fileoverview CodeBody 컴포넌트입니다. 현재는 갤러리 포스트에만 사용되고 있으며, CodeMirror를 사용하여 코드를 렌더링하고, Viz.js를 사용하여 ERD 시각화 svg를 렌더링합니다.
+ */
+
 "use client";
 import useCodeMirror from "@/hooks/useCodeMirror";
 import useCodeMirrorWithTabs from "@/hooks/useCodeMirrorWithTabs";
@@ -8,6 +12,10 @@ import { TabEditorBlock } from "@/types/code/markdown";
 import { Post } from "@/types/posts/posts";
 import { useMemo, useState } from "react";
 
+/**
+ * @description CodeBody 컴포넌트입니다. 현재는 갤러리 포스트에만 사용되고 있으며, CodeMirror를 사용하여 코드를 렌더링하고, Viz.js를 사용하여 ERD 시각화 svg를 렌더링합니다.
+ * @param {Post} postContent - 포스트의 내용입니다. frontmatter에는 제목, 날짜, 카테고리, 태그 등이 포함되어 있습니다. 더 자세한 내용은, type이 정의된 types/posts/frontmatters.ts를 봐주세요.
+ */
 export default function CodeBody(postContent: Post) {
   const [data, setData] = useState<string>(postContent.vizCodeBlocks[0]?.code);
 

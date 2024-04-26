@@ -1,10 +1,17 @@
+/**
+ * @fileoverview 이 파일은 PostBody 컴포넌트를 정의합니다. CodeBody와 합쳐서 갤러리 포스트를 만드는 컴포넌트입니다.
+ * Contribute, About 등의 페이지는 이 PostBody만을 사용하여 렌더링합니다. 즉, 모든 Markdown 파일은 이 컴포넌트를 통해 렌더링됩니다.
+ */
+
 import TableOfContents from "@/components/TableOfContents";
 import { Post } from "@/types/posts/posts";
 import { format } from "date-fns";
-import MarkdownIt from "markdown-it";
 
-const md = new MarkdownIt();
-
+/**
+ * @description PostBody 컴포넌트입니다. CodeBody와 합쳐서 갤러리 포스트를 만드는 컴포넌트입니다.
+ * Contribute, About 등의 페이지는 이 PostBody만을 사용하여 렌더링합니다. 모든 Markdown 파일은 이 컴포넌트를 통해 렌더링됩니다.
+ * @param {Post} postContent - 포스트의 내용입니다. frontmatter에는 제목, 날짜, 카테고리, 태그 등이 포함되어 있습니다. 더 자세한 내용은, type이 정의된 types/posts/frontmatters.ts를 봐주세요.
+ */
 export default function PostBody(postContent: Post) {
   const { title, date, category, tags } = postContent.frontmatter;
 

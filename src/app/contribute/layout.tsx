@@ -1,4 +1,5 @@
-// app/about/layout.tsx
+// app/contribute/layout.tsx
+
 import { Metadata } from "next";
 import { LOOT_CONTRIBUTE_METADATA } from "../../../constants/SEO";
 
