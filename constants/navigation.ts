@@ -16,6 +16,12 @@ const NAVBAR_ITEMS = [
     description: "프로젝트에 대한 정보를 담은 페이지로 이동하는 링크",
     icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/about.svg`,
   },
+  {
+    name: "Contribute",
+    title: "기여",
+    description: "프로젝트에 대한 기여 가이드를 담은 페이지로 이동하는 링크",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/about.svg`,
+  },
   //   {
   //     name: "Contact",
   //     title: "연락처",
