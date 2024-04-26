@@ -1,5 +1,5 @@
 ---
-title: Django Model
+title: Contribute Guide
 date: 2024-05-05
 category: Django
 modelCount: 0
@@ -23,7 +23,7 @@ contributor:
 
 Markdown 파일의 맨 위에는 프론트매터를 작성해야 합니다. 프론트매터는 Markdown 파일의 메타데이터를 담고 있는 YAML 형식의 블록입니다. 아래와 같은 템플릿을 사용하여 프론트매터를 작성해주세요.
 
-또는 [TEMPLATE.md](../contribute/TEMPLATE.md) 를 복사하여 새 파일에 붙여넣으세요.
+또는 [TEMPLATE.md](https://github.com/DjangoModelGallery/djangomodelgallery/blob/main/contribute/TEMPLATE.md) 를 복사하여 새 파일에 붙여넣으세요.
 
 ```yaml
 ---
@@ -156,4 +156,4 @@ Markdown 파일이 승인되면, Pull Request가 머지되고 배포 과정이 �
 ## 4. 예시 파일
 
 예시 파일을 참고하여 Markdown 파일을 작성하시기 바랍니다.  
-[템플릿 보기](../contribute/TEMPLATE.md)
+[템플릿 보기](https://github.com/DjangoModelGallery/djangomodelgallery/blob/main/contribute/TEMPLATE.md)

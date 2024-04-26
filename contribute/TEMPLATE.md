@@ -1,12 +1,12 @@
 ---
-title: Django Model
+title: 템플릿
 date: 2024-05-05
 category: Django
 modelCount: 0
 tags:
   - Django
   - Beginner
-published: true
+published: false
 contributor:
   name: 이혜림
   social:
