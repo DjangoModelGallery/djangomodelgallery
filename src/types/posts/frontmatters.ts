@@ -10,14 +10,13 @@ interface Contributor {
 }
 
 interface FrontmatterData {
-  id: string;
   title: string;
   date: string;
   category: CategoryKey;
   modelCount: number;
-  tags: string[];
-  fileName: string;
+  tags?: string[] | [];
   contributor: Contributor;
+  published?: boolean;
 }
 
 export type { CategoryKey, Contributor, FrontmatterData };
