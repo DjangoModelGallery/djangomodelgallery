@@ -8,7 +8,7 @@ tags:
   - Beginner
 published: false
 contributor:
-  name: 이혜림
+  name: 기여자 이름
   social:
     github: https://github.com/matty255
 ---
