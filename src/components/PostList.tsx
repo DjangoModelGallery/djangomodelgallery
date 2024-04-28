@@ -7,7 +7,15 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
 import { CATEGORIES_ARRAY } from "../../constants/categories";
+
+import FakeCard from "@/common/FakeCard";
+import dynamic from "next/dynamic";
 import SearchForm from "./SearchForm";
+
+const PostCard = dynamic(() => import("@/common/PostCard"), {
+  ssr: false,
+  loading: () => <FakeCard />,
+});
 
 function PostList({
   posts,
@@ -63,12 +71,17 @@ function PostList({
         }
         tagOptions={postTags?.map((tag) => ({ value: tag, label: tag })) ?? []}
       />
-      <ul className="grid grid-cols-3 gap-4">
+      <ul className="grid grid-cols-3 gap-4 pt-3">
         {filteredPosts?.map(
           (post: Post | null) =>
             post && (
-              <li key={post.slug}>
-                <Link href={`/${path}/${post.slug}`}>{post.title}</Link>
+              <li
+                key={post.slug}
+                className="border rounded dark:border-white border-black border-spacing-4 dark:bg-gray-800 bg-gray-100 p-4 hover:bg-neutral-500 dark:hover:bg-neutral-600 transition duration-200 ease-in-out"
+              >
+                <Link href={`/${path}/${post.slug}`}>
+                  <PostCard {...post} />
+                </Link>
               </li>
             )
         )}
