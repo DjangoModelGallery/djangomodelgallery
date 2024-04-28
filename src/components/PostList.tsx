@@ -6,7 +6,6 @@ import { formatQuery } from "@/utils/formatQuery";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
-import { CATEGORIES_ARRAY } from "../../constants/categories";
 
 import FakeCard from "@/common/FakeCard";
 import SNSLink from "@/common/SNSLink";
@@ -28,48 +27,36 @@ function PostList({
   path?: string;
 }) {
   const searchParams = useSearchParams();
-  const categoryQuery = searchParams.get("category");
-  const tagQuery = searchParams.get("tag");
 
-  const categories = categoryQuery
-    ? categoryQuery.split(",").map((c) => formatQuery(c.trim()))
-    : [];
+  const tagQuery = searchParams.get("tag");
+  const wordQuery = searchParams.get("query");
 
   const tags = tagQuery
     ? tagQuery.split(",").map((t) => formatQuery(t.trim()))
     : [];
 
+  const query = wordQuery ? wordQuery : "";
+
   const filteredPosts =
-    categories.length > 0 || tags.length > 0
+    tags.length > 0 || query
       ? posts.filter(
           (post: Post | null) =>
             post &&
-            (categories.length === 0 ||
-              (post.frontmatter.category &&
-                categories.includes(
-                  formatQuery(post.frontmatter.category.toString())
-                ))) &&
             (tags.length === 0 ||
               (post.frontmatter.tags &&
                 post.frontmatter.tags.some((tag) =>
                   tags.includes(formatQuery(tag))
-                )))
+                ))) &&
+            (!query ||
+              (/[a-zA-Z]/.test(post.frontmatter.title)
+                ? post.frontmatter.title.toLowerCase().replace(/\s/g, "")
+                : post.frontmatter.title.replace(/\s/g, "")
+              ).includes(query))
         )
       : posts;
-
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <SearchForm
-        sortOptions={[
-          { value: "desc", label: "오름차순" },
-          { value: "asc", label: "내림차순" },
-        ]}
-        categoryOptions={
-          CATEGORIES_ARRAY.map((category) => ({
-            value: category.categoryName,
-            label: category.title,
-          })) ?? []
-        }
         tagOptions={postTags?.map((tag) => ({ value: tag, label: tag })) ?? []}
       />
       <ul className="grid grid-cols-3 gap-4 pt-3">

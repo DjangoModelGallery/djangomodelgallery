@@ -14,7 +14,7 @@ interface Contributor {
 interface FrontmatterData {
   title: string;
   date: string;
-  category: CategoryKey;
+  category?: CategoryKey;
   modelCount: number;
   tags?: string[] | [];
   contributor: Contributor;

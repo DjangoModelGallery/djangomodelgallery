@@ -111,10 +111,10 @@ export const LOOT_CONTRIBUTE_DETAIL_METADATA = (postDetail: Post | null) => {
 export const LOOT_POST_DETAIL_METADATA = (postDetail: Post | null) => {
   return {
     title: postDetail?.title,
-    description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
+    description: `${postDetail?.frontmatter.title} | Django Model Gallery.`,
     openGraph: {
       title: postDetail?.title,
-      description: `${postDetail?.frontmatter.category} | Django Model Gallery.`,
+      description: `${postDetail?.frontmatter.title} | Django Model Gallery.`,
       type: "website",
     },
   };

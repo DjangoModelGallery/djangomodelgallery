@@ -2,10 +2,8 @@
 "use client";
 import useTailwindBreakpoint from "@/hooks/useTailwindBreakpoint";
 import { useToggle } from "@/hooks/useToggle";
-import { formatQuery } from "@/utils/formatQuery";
 import Image from "next/image";
 import Link from "next/link";
-import { CATEGORIES_ARRAY } from "../../constants/categories";
 import {
   NAVBAR_ITEMS,
   NAVBAR_TITLE,
@@ -61,7 +59,7 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-            <h2 className="tracking-widest text-xs pt-5 pl-2 pb-1 dark:text-neutral-500">
+            {/* <h2 className="tracking-widest text-xs pt-5 pl-2 pb-1 dark:text-neutral-500">
               CATEGORYS
             </h2>
             {CATEGORIES_ARRAY.map((category) => (
@@ -88,7 +86,7 @@ export default function Header() {
                   {category.title}
                 </Link>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>

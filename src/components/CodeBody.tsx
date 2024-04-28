@@ -56,9 +56,21 @@ export default function CodeBody(postContent: Post) {
   );
 
   const { containerRef } = useViz(data);
-  const { zoomIn, zoomOut, resetZoom, resetPan, zoomLevel } = useZoomAndPan({
+  const {
+    zoomIn,
+    zoomOut,
+    resetZoom,
+    resetPan,
+    zoomLevel,
+    downloadPNG,
+    downloadSVG,
+  } = useZoomAndPan({
     containerRef,
   });
+
+  const fileName =
+    postContent.frontmatter.title.replace(/ /g, "_") + "by_DjangoModelGallery";
+
   return (
     <div className="sticky top-0 bg-slate-700">
       <button onClick={zoomIn} className="btn btn-sm btn-outline ">
@@ -72,6 +84,19 @@ export default function CodeBody(postContent: Post) {
       </button>
       <button onClick={resetPan} className="btn btn-sm btn-outline ">
         Reset Pan
+      </button>
+      <button
+        onClick={() => downloadPNG(fileName)}
+        className="btn btn-sm btn-outline "
+      >
+        Download PNG
+      </button>
+
+      <button
+        onClick={() => downloadSVG(fileName)}
+        className="btn btn-sm btn-outline "
+      >
+        Download SVG
       </button>
       <p className="">Current Zoom Level: {zoomLevel.toFixed(2)}</p>
       <p className="">

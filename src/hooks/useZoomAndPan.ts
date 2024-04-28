@@ -10,7 +10,9 @@ interface UseZoomAndPanReturn {
   zoomIn: () => void;
   zoomOut: () => void;
   resetZoom: () => void;
-  resetPan: () => void; // Pan 초기화 함수 추가
+  resetPan: () => void;
+  downloadPNG: (filename?: string) => void;
+  downloadSVG: (filename?: string) => void;
   zoomLevel: number;
 }
 
@@ -33,13 +35,12 @@ export const useZoomAndPan = ({
             const zoom = d3
               .zoom<SVGElement, unknown>()
               .filter((event) => (event.type === "wheel" ? event.altKey : true))
-              .scaleExtent([0.5, 8]) // 최소 줌 레벨을 0.5로 설정
+              .scaleExtent([0.5, 8])
               .translateExtent([
                 [0, 0],
                 [node.clientWidth, node.clientHeight],
               ])
               .on("zoom", (event: d3.D3ZoomEvent<SVGElement, unknown>) => {
-                // if (!event.sourceEvent || !event.sourceEvent.altKey) return; // Alt 키 체크
                 setZoomLevel(event.transform.k);
                 const transform = event.transform;
                 svg.attr(
@@ -87,5 +88,51 @@ export const useZoomAndPan = ({
     }
   };
 
-  return { zoomIn, zoomOut, resetZoom, resetPan, zoomLevel };
+  const downloadPNG = (filename = "image") => {
+    if (svgRef.current) {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const svg = new XMLSerializer().serializeToString(svgRef.current);
+      const img = new Image();
+      const blob = new Blob([svg], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      img.src = url;
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx?.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const a = document.createElement("a");
+            a.download = `${filename}.png`;
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            URL.revokeObjectURL(a.href);
+          }
+        }, "image/png");
+        URL.revokeObjectURL(url);
+      };
+    }
+  };
+
+  const downloadSVG = (filename = "image") => {
+    if (svgRef.current) {
+      const serializer = new XMLSerializer();
+      const source = serializer.serializeToString(svgRef.current);
+      const a = document.createElement("a");
+      a.download = `${filename}.svg`;
+      a.href = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+      a.click();
+    }
+  };
+
+  return {
+    zoomIn,
+    zoomOut,
+    resetZoom,
+    resetPan,
+    downloadPNG,
+    downloadSVG,
+    zoomLevel,
+  };
 };

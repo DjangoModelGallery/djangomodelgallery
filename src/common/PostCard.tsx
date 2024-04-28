@@ -20,9 +20,6 @@ export default function PostCard(post: Post) {
             작성일: {parseDateString(post.frontmatter?.date)}
           </p>
         </div>
-        <p className="bg-activation text-primary text-sm font-medium px-2 py-1 rounded-md truncate">
-          {post.frontmatter.category}
-        </p>
       </div>
     </li>
   );

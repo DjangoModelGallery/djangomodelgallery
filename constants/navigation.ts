@@ -1,7 +1,3 @@
-import { CATEGORIES } from "./categories";
-
-const categoryTitles = Object.keys(CATEGORIES);
-
 // 제목을 NAVBAR_ITEMS 배열에 추가
 const NAVBAR_ITEMS = [
   {
@@ -14,6 +10,12 @@ const NAVBAR_ITEMS = [
     name: "About",
     title: "소개",
     description: "프로젝트에 대한 정보를 담은 페이지로 이동하는 링크",
+    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/about.svg`,
+  },
+  {
+    name: "posts",
+    title: "모델",
+    description: "모델 정보를 담은 갤러리로 이동하는 링크",
     icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/about.svg`,
   },
   {

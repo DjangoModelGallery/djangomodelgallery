@@ -17,8 +17,8 @@ const SearchSelect = dynamic(() => import("@/common/SearchSelect"), {
 });
 
 interface SearchFormProps {
-  sortOptions: Option[];
-  categoryOptions: Option[];
+  // sortOptions: Option[];
+  // categoryOptions: Option[];
   tagOptions: Option[];
 }
 /**
@@ -26,35 +26,17 @@ interface SearchFormProps {
  * 이 컴포넌트는 정렬, 카테고리, 태그 옵션을 선택하고 검색 쿼리를 입력할 수 있습니다.
  * 선택한 옵션과 검색 쿼리는 URL의 검색 매개변수로 설정되며, 이는 페이지를 새로 고침하거나 다시 방문할 때 선택한 옵션과 검색 쿼리를 유지합니다.
  *
- * @param {Option[]} sortOptions - 정렬 옵션 목록
- * @param {Option[]} categoryOptions - 카테고리 옵션 목록
  * @param {Option[]} tagOptions - 태그 옵션 목록
  */
-export default function SearchForm({
-  sortOptions,
-  categoryOptions,
-  tagOptions,
-}: SearchFormProps) {
+export default function SearchForm({ tagOptions }: SearchFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedOptions, setSelectedOptions] = useState({
-    sort: [] as MultiValue<Option>,
-    category: [] as MultiValue<Option>,
     tag: [] as MultiValue<Option>,
   });
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    const sortParams =
-      searchParams
-        .get("sort")
-        ?.split(",")
-        .map((t) => formatQuery(t.trim())) || [];
-    const categoryParams =
-      searchParams
-        .get("category")
-        ?.split(",")
-        .map((t) => formatQuery(t.trim())) || [];
     const tagParams =
       searchParams
         .get("tag")
@@ -71,13 +53,11 @@ export default function SearchForm({
     };
 
     setSelectedOptions({
-      sort: mapParamsToOptions(sortParams, sortOptions),
-      category: mapParamsToOptions(categoryParams, categoryOptions),
       tag: mapParamsToOptions(tagParams, tagOptions),
     });
 
     setQuery(queryParams);
-  }, [searchParams, sortOptions, categoryOptions, tagOptions]);
+  }, [tagOptions, searchParams]);
 
   const handleChange =
     (field: keyof typeof selectedOptions) => (value: MultiValue<Option>) => {
@@ -112,26 +92,14 @@ export default function SearchForm({
   };
 
   const handleReset = () => {
-    setSelectedOptions({ sort: [], category: [], tag: [] });
+    setSelectedOptions({ tag: [] });
     setQuery("");
     router.push("/posts");
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex space-x-4">
-        <SearchSelect
-          options={sortOptions}
-          onChange={handleChange("sort")}
-          placeholder="Sort by..."
-          value={selectedOptions.sort}
-        />
-        <SearchSelect
-          options={categoryOptions}
-          onChange={handleChange("category")}
-          placeholder="Select categories..."
-          value={selectedOptions.category}
-        />
+      <div className="flex space-x-4 justify-end">
         <SearchSelect
           options={tagOptions}
           onChange={handleChange("tag")}
