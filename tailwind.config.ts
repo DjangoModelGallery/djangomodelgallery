@@ -20,7 +20,9 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
+            margin: "0 auto",
             color: "#333",
+            maxWidth: "105ch",
             backgroundColor: "transparent",
             h1: {
               color: "lime",
