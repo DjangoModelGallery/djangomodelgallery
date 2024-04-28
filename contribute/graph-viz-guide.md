@@ -1,7 +1,6 @@
 ---
 title: Graphviz Guide
 date: 2024-05-05
-category: Django
 modelCount: 0
 tags:
   - Django

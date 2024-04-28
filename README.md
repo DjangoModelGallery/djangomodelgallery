@@ -65,48 +65,13 @@ constants > navigation.ts
 네비게이션 바 항목은 다음과 같이 설정합니다:
 
 ```ts
-import { CATEGORIES } from "./categories";
-
-const categoryTitles = Object.keys(CATEGORIES);
-const NAVBAR_ITEMS = ["Home", "About", "Contact", ...categoryTitles];
+const NAVBAR_ITEMS = ["Home", "About", "Contact"];
 
 const NAVBAR_TITLE = "Django Model Gallery";
 const NAVBAR_TITLE_SHORT = "DMG";
 
 export { NAVBAR_ITEMS, NAVBAR_TITLE, NAVBAR_TITLE_SHORT };
 ```
-
-### 카테고리 설정
-
-constants > categories.ts
-
-카테고리는 다음과 같이 설정합니다:
-
-```ts
-import { Category } from "@/types/posts/posts";
-
-const CATEGORIES: Category = {
-  shopping: {
-    categoryName: "shopping",
-    title: "쇼핑",
-    description: "쇼핑 관련한 정보를 담은 카테고리",
-    icon: `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/star.svg",
-  },
-  // ...
-};
-
-const CATEGORIES_ARRAY = Object.entries(CATEGORIES).map(([key, value]) => ({
-  key,
-  ...value,
-}));
-
-export { CATEGORIES, CATEGORIES_ARRAY };
-export type CategoryKey = keyof typeof CATEGORIES;
-```
-
-카테고리 아이콘
-
-> https://fonts.google.com/icons
 
 ### 메타데이터 설정
 

@@ -1,7 +1,7 @@
 ---
 title: Infinite Pagination Article Model
 date: 2024-04-28
-category: Blog
+
 modelCount: 3
 tags:
   - Django
@@ -22,9 +22,9 @@ contributor:
 
 [[toc]]
 
-## 장고 모델 코드
+# 장고 모델 코드
 
-### articles 앱의 모델
+## articles 앱의 모델
 
 ```python
 # articles > models.py
@@ -59,7 +59,7 @@ class Reply(models.Model):
 
 [^1]
 
-### accounts 앱의 모델
+## accounts 앱의 모델
 
 ```python
 # accounts > models.py
@@ -120,9 +120,9 @@ digraph G {
 }
 ```
 
-## 모델 설명
+# 모델 설명
 
-### Article 모델
+## Article 모델
 
 - `author`: Article을 작성한 유저(User)와 1:N 관계를 가집니다.
 - `title`: Article의 제목을 나타냅니다.
@@ -130,7 +130,7 @@ digraph G {
 - `created_at`: Article의 생성 시간을 자동으로 기록합니다.
 - `updated_at`: Article의 수정 시간을 자동으로 업데이트합니다.
 
-### Reply 모델
+## Reply 모델
 
 - `article`: Reply가 속한 Article과 1:N 관계를 가집니다.
 - `author`: Reply를 작성한 유저(User)와 1:N 관계를 가집니다.
@@ -138,7 +138,7 @@ digraph G {
 - `created_at`: Reply의 생성 시간을 자동으로 기록합니다.
 - `updated_at`: Reply의 수정 시간을 자동으로 업데이트합니다.
 
-### User 모델
+## User 모델
 
 - Django의 기본 User 모델을 상속받아 확장합니다.
 - `bio`: 유저의 자기소개를 저장합니다.
@@ -151,11 +151,11 @@ digraph G {
 - Article과 Reply는 1:N 관계를 가집니다. 한 개의 Article에는 여러 개의 Reply가 달릴 수 있습니다.
 - User와 Reply는 1:N 관계를 가집니다. 한 명의 유저는 여러 개의 Reply를 작성할 수 있습니다.
 
-## 페이지네이션 구현 방법
+# 페이지네이션 구현 방법
 
 DRF의 기본 페이지네이션 클래스를 활용하거나 커스텀 페이지네이션 클래스를 작성하여 무한 스크롤 페이지네이션을 구현할 수 있습니다.
 
-### 1. DRF의 기본 페이지네이션 클래스 사용
+## 1. DRF의 기본 페이지네이션 클래스 사용
 
 DRF에서 제공하는 `PageNumberPagination` 또는 `LimitOffsetPagination` 클래스를 활용하여 페이지네이션을 구현할 수 있습니다.
 
@@ -177,7 +177,7 @@ class ReplyPagination(LimitOffsetPagination):
     max_limit = 50
 ```
 
-### 2. 커스텀 페이지네이션 클래스 작성
+## 2. 커스텀 페이지네이션 클래스 작성
 
 DRF의 기본 페이지네이션 클래스를 상속받아 커스텀 페이지네이션 클래스를 작성할 수 있습니다. 이를 통해 무한 스크롤에 최적화된 페이지네이션을 구현할 수 있습니다.
 
