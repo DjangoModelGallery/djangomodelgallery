@@ -1,8 +1,9 @@
-// app/posts/PostList.client.tsx
+// app/posts/PostList.tsx
 "use client";
 import { Post } from "@/types/posts/posts";
 import { ErrorFallback } from "@/utils/errorFallback";
 import { formatQuery } from "@/utils/formatQuery";
+import { compareDesc } from "date-fns";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ErrorBoundary } from "react-error-boundary";
@@ -10,6 +11,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import FakeCard from "@/common/FakeCard";
 import SNSLink from "@/common/SNSLink";
 import dynamic from "next/dynamic";
+import { useMemo } from "react";
 import SearchForm from "./SearchForm";
 
 const PostCard = dynamic(() => import("@/common/PostCard"), {
@@ -54,13 +56,24 @@ function PostList({
               ).includes(query))
         )
       : posts;
+
+  const sortedPosts = useMemo(() => {
+    return filteredPosts.sort((a, b) => {
+      if (!a || !b) return 0;
+      return compareDesc(
+        new Date(a.frontmatter.date),
+        new Date(b.frontmatter.date)
+      );
+    });
+  }, [filteredPosts]);
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <SearchForm
         tagOptions={postTags?.map((tag) => ({ value: tag, label: tag })) ?? []}
       />
       <ul className="grid grid-cols-3 gap-4 pt-3">
-        {filteredPosts?.map(
+        {sortedPosts?.map(
           (post: Post | null) =>
             post && (
               <div className="relative" key={post.slug}>
