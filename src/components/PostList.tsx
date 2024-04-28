@@ -9,6 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { CATEGORIES_ARRAY } from "../../constants/categories";
 
 import FakeCard from "@/common/FakeCard";
+import SNSLink from "@/common/SNSLink";
 import dynamic from "next/dynamic";
 import SearchForm from "./SearchForm";
 
@@ -75,14 +76,31 @@ function PostList({
         {filteredPosts?.map(
           (post: Post | null) =>
             post && (
-              <li
-                key={post.slug}
-                className="border rounded dark:border-white border-black border-spacing-4 dark:bg-gray-800 bg-gray-100 p-4 hover:bg-neutral-500 dark:hover:bg-neutral-600 transition duration-200 ease-in-out"
-              >
+              <div className="relative" key={post.slug}>
                 <Link href={`/${path}/${post.slug}`}>
                   <PostCard {...post} />
                 </Link>
-              </li>
+                <aside className="absolute top-2 right-2">
+                  {post.frontmatter.contributor.social.twitter && (
+                    <SNSLink
+                      link={post.frontmatter.contributor.social.twitter}
+                      iconType={"Twitter"}
+                    />
+                  )}
+                  {post.frontmatter.contributor.social.github && (
+                    <SNSLink
+                      link={post.frontmatter.contributor.social.github}
+                      iconType={"Github"}
+                    />
+                  )}
+                  {post.frontmatter.contributor.social.linkedin && (
+                    <SNSLink
+                      link={post.frontmatter.contributor.social.linkedin}
+                      iconType={"Linkedin"}
+                    />
+                  )}
+                </aside>
+              </div>
             )
         )}
 

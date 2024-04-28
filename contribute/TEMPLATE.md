@@ -40,7 +40,7 @@ interface Contributor {
   social: {
     github: string;
     twitter?: string;
-    insta?: string;
+    linkedin?: string;
   };
 }
 

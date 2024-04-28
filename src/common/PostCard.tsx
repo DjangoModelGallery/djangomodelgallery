@@ -3,20 +3,27 @@ import { parseDateString } from "@/utils/parseTime";
 
 export default function PostCard(post: Post) {
   return (
-    <>
-      <h2 className="font-bold text-2xl mb-3">{post.title}</h2>
-      <p>태그: {post.frontmatter.tags && post.frontmatter.tags}</p>
-      <p className="inline-block">
-        기여자:
-        {post.frontmatter.contributor.name}
-      </p>
-      <p>{post.frontmatter.contributor.social.github}</p>
-      <p className="text-graylv3 text-sm inline-block font-normal">
-        작성일: {parseDateString(post.frontmatter?.date)}
-      </p>
-      <p className="inline-block bg-activation text-primary md:text-sm font-medium mb-3 px-3 py-1.5 rounded-lg transition duration-200 ease-in-out hover:bg-blue-400 hover:text-white">
-        {post.frontmatter.category}
-      </p>
-    </>
+    <li className="border rounded dark:border-white border-black border-spacing-4 dark:bg-gray-800 bg-gray-100 p-4 hover:bg-neutral-500 dark:hover:bg-neutral-600 transition duration-200 ease-in-out aspect-video">
+      <div className="grid grid-cols-1 gap-2 h-full">
+        <h2 className="font-bold text-xl mb-2 truncate">{post.title}</h2>
+        <div className="grid grid-cols-2 gap-2">
+          <p className="truncate">
+            태그: {post.frontmatter.tags && post.frontmatter.tags}
+          </p>
+          <p className="truncate">
+            기여자:
+            {post.frontmatter.contributor.name}
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <p className="text-graylv3 text-sm font-normal truncate">
+            작성일: {parseDateString(post.frontmatter?.date)}
+          </p>
+        </div>
+        <p className="bg-activation text-primary text-sm font-medium px-2 py-1 rounded-md truncate">
+          {post.frontmatter.category}
+        </p>
+      </div>
+    </li>
   );
 }

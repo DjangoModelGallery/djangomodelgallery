@@ -1,11 +1,13 @@
 import { CategoryKey } from "../../../constants/categories";
 
+type iconType = "Github" | "Linkedin" | "Twitter";
 interface Contributor {
   name: string;
   social: {
     github: string;
     twitter?: string;
     insta?: string;
+    linkedin?: string;
   };
 }
 
@@ -19,4 +21,4 @@ interface FrontmatterData {
   published?: boolean;
 }
 
-export type { CategoryKey, Contributor, FrontmatterData };
+export type { CategoryKey, Contributor, FrontmatterData, iconType };

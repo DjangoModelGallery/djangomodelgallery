@@ -41,6 +41,7 @@ contributor:
   social:
     github: 작성자 GitHub 프로필 URL (없을 경우 빈 문자열)
     twitter: 작성자 Twitter 프로필 URL (없을 경우 빈 문자열)
+    linkedin: 작성자 linkedin 프로필 URL (없을 경우 빈 문자열)
 ---
 ```
 
@@ -65,6 +66,7 @@ contributor:
   - `social`: 작성자의 소셜 정보입니다.
     - `github`: 작성자의 GitHub 프로필 URL입니다. 입력하고 싶지 않을 경우 지워도 됩니다.
     - `twitter`: 작성자의 Twitter 프로필 URL입니다. 입력하고 싶지 않을 경우 지워도 됩니다.
+    - `linkedIn`: 작성자의 LinkedIn 프로필 URL입니다. 입력하고 싶지 않을 경우 지워도 됩니다.
 
 ### 작성 시 주의사항
 
