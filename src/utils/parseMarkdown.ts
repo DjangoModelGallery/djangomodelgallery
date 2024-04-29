@@ -8,14 +8,20 @@ import { cache } from "react";
 export const parseMarkdown = cache(
   async (markdownContent: string): Promise<ParsedMarkdown> => {
     const codeBlocks: CodeBlock[] = [];
+    const vizCodeBlocks: CodeBlock[] = [];
 
     const md = new MarkdownIt({
       html: true,
       linkify: true,
       typographer: true,
       highlight: (code, language) => {
-        codeBlocks.push({ language: language || "", code });
-        return "";
+        if (language === "viz") {
+          vizCodeBlocks.push({ language, code });
+          return "";
+        } else {
+          codeBlocks.push({ language: language || "", code });
+          return "";
+        }
       },
     })
       .use(anchor, {
@@ -28,20 +34,25 @@ export const parseMarkdown = cache(
 
     const html = md.render(markdownContent);
 
+    // 렌더링된 HTML에서 viz 코드 블록 제거
+    const htmlWithoutViz = html.replace(
+      /<pre><code class="language-viz">[\s\S]*?<\/code><\/pre>/g,
+      ""
+    );
+
     const pythonCodeBlocks: CodeBlock[] = [];
-    const vizCodeBlocks: CodeBlock[] = [];
     const jsCodeBlocks: CodeBlock[] = [];
     const otherCodeBlocks: CodeBlock[] = [];
 
     // 렌더링된 HTML에서 목차 추출
     const tocRegex = /<nav class="table-of-contents">(.*?)<\/nav>/s;
-    const tocMatch = html.match(tocRegex);
+    const tocMatch = htmlWithoutViz.match(tocRegex);
     const tableOfContents = tocMatch ? tocMatch[1] : "";
 
     // 렌더링된 HTML에서 각주 추출
     const footnotesRegex =
       /<div class="footnotes">\s*<ol>(.*?)<\/ol>\s*<\/div>/s;
-    const footnotesMatch = html.match(footnotesRegex);
+    const footnotesMatch = htmlWithoutViz.match(footnotesRegex);
     const footnotes = footnotesMatch ? footnotesMatch[1] : "";
 
     codeBlocks.forEach((block) => {
@@ -52,8 +63,6 @@ export const parseMarkdown = cache(
         block.code.includes(".py")
       ) {
         pythonCodeBlocks.push(block);
-      } else if (block.language === "viz") {
-        vizCodeBlocks.push(block);
       } else if (block.language === "js") {
         jsCodeBlocks.push(block);
       } else {
@@ -62,7 +71,7 @@ export const parseMarkdown = cache(
     });
 
     return {
-      html,
+      html: htmlWithoutViz,
       tableOfContents,
       footnotes,
       pythonCodeBlocks,

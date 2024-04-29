@@ -12,7 +12,9 @@ export default function PostDetail({ post }: { post: Post }) {
   const { width, breakpoints } = useTailwindBreakpoint();
   const pathname = usePathname();
   const [open, setOpen] = useToggle(false);
+
   const { setHistory } = useHistoryStore();
+
   useEffect(() => {
     setHistory(pathname);
   }, [pathname, setHistory]);

@@ -6,6 +6,7 @@ import { useToggle } from "@/hooks/useToggle";
 import { useHistoryStore } from "@/store/useHistoryStore";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   NAVBAR_ITEMS,
   NAVBAR_TITLE,
@@ -18,6 +19,12 @@ export default function Header() {
   const { width, breakpoints } = useTailwindBreakpoint();
   const { history } = useHistoryStore();
 
+  const pathname = usePathname();
+
+  let lastVisitedModel = history[history.length - 1];
+  if (lastVisitedModel === pathname) {
+    lastVisitedModel = history[history.length - 2];
+  }
   return (
     <header className="navbar bg-base-100">
       <div className="navbar-start">
@@ -74,12 +81,12 @@ export default function Header() {
       </div>
       <div className="navbar-end"></div>
 
-      {history && (
+      {history.length > 0 && lastVisitedModel && (
         <div className="fixed bottom-5 right-0 rounded-l-xl bg-slate-600 flex flex-col hover:bg-lime-400 text-white hover:text-neutral-800 cursor-pointer">
           <p className="self-start text-[0.5rem] pl-4 pt-0.5">
             마지막으로 본 모델:
           </p>
-          <HistoryStack pathName={history} />
+          <HistoryStack pathName={lastVisitedModel} />
         </div>
       )}
     </header>
