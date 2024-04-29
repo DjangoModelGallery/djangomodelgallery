@@ -12,8 +12,8 @@ export default function PostDetail({ post }: { post: Post }) {
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-        <article className="prose col-span-1 overflow-auto mx-auto">
+      <section className="w-full grid grid-cols-1 md:grid-cols-2">
+        <article className="prose col-span-1 overflow-auto mx-auto w-full">
           <PostBody {...post} />
         </article>
 
