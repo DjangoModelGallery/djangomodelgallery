@@ -1,3 +1,4 @@
+"use client";
 import useTailwindBreakpoint from "@/hooks/useTailwindBreakpoint";
 import { scrollToBottom, scrollToTop } from "@/utils/scrolls";
 import Link from "next/link";

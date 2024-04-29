@@ -3,6 +3,7 @@
  * Contribute, About 등의 페이지는 이 PostBody만을 사용하여 렌더링합니다. 즉, 모든 Markdown 파일은 이 컴포넌트를 통해 렌더링됩니다.
  */
 
+import Tag from "@/common/Tag";
 import TableOfContents from "@/components/TableOfContents";
 import { Post } from "@/types/posts/posts";
 import { format } from "date-fns";
@@ -28,13 +29,9 @@ export default function PostBody(postContent: Post) {
         <span className="post-meta-separator">•</span>
         <span>{category}</span>
       </div>
-      <div className="post-tags">
+      <div className="post-tags inline-flex gap-1 pb-8 flex-wrap">
         {tags && tags.length ? (
-          tags.map((tag: string) => (
-            <span key={tag} className="post-tag">
-              #{tag}
-            </span>
-          ))
+          tags.map((tag: string) => <Tag key={tag} tagName={tag} />)
         ) : (
           <p>태그가 없습니다.</p>
         )}
