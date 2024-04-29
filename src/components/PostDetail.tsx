@@ -1,14 +1,21 @@
 "use client";
 import useTailwindBreakpoint from "@/hooks/useTailwindBreakpoint";
 import { useToggle } from "@/hooks/useToggle";
+import { useHistoryStore } from "@/store/useHistoryStore";
 import { Post } from "@/types/posts/posts";
-import { Suspense } from "react";
+import { usePathname } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import CodeBody from "./CodeBody";
 import PostBody from "./PostBody";
 
 export default function PostDetail({ post }: { post: Post }) {
   const { width, breakpoints } = useTailwindBreakpoint();
+  const pathname = usePathname();
   const [open, setOpen] = useToggle(false);
+  const { setHistory } = useHistoryStore();
+  useEffect(() => {
+    setHistory(pathname);
+  }, [pathname, setHistory]);
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>

@@ -1,7 +1,9 @@
 // Header.tsx
 "use client";
+import HistoryStack from "@/common/HistoryStack";
 import useTailwindBreakpoint from "@/hooks/useTailwindBreakpoint";
 import { useToggle } from "@/hooks/useToggle";
+import { useHistoryStore } from "@/store/useHistoryStore";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,6 +16,8 @@ import DarkModeToggle from "./DarkModeToggle";
 export default function Header() {
   const [isopen, toggle] = useToggle(false);
   const { width, breakpoints } = useTailwindBreakpoint();
+  const { history } = useHistoryStore();
+
   return (
     <header className="navbar bg-base-100">
       <div className="navbar-start">
@@ -59,34 +63,6 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-            {/* <h2 className="tracking-widest text-xs pt-5 pl-2 pb-1 dark:text-neutral-500">
-              CATEGORYS
-            </h2>
-            {CATEGORIES_ARRAY.map((category) => (
-              <li
-                key={category.categoryName}
-                className=" text-xs text-neutral-500 dark:text-neutral-400"
-              >
-                <Link
-                  href={
-                    category.categoryName !== "all"
-                      ? `/posts/?category=${formatQuery(category.categoryName)}`
-                      : "/posts"
-                  }
-                >
-                  <Image
-                    src={
-                      category?.icon ||
-                      `${process.env.NEXT_PUBLIC_ASSET_BASE_PATH}/assets/icons/blog.svg`
-                    }
-                    alt={category.title}
-                    width={22}
-                    height={22}
-                  />
-                  {category.title}
-                </Link>
-              </li>
-            ))} */}
           </ul>
         </div>
       </div>
@@ -97,6 +73,15 @@ export default function Header() {
         </Link>
       </div>
       <div className="navbar-end"></div>
+
+      {history && (
+        <div className="fixed bottom-5 right-0 rounded-l-xl bg-slate-600 flex flex-col hover:bg-lime-400 text-white hover:text-neutral-800 cursor-pointer">
+          <p className="self-start text-[0.5rem] pl-4 pt-0.5">
+            마지막으로 본 모델:
+          </p>
+          <HistoryStack pathName={history} />
+        </div>
+      )}
     </header>
   );
 }

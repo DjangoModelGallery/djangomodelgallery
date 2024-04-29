@@ -31,12 +31,13 @@ export default function Tag({ tagName }: { tagName: string }) {
     <Link
       href={`/posts?tag=${tagName}`}
       passHref
+      replace
       style={{
         padding: "0.025rem 1rem",
         textUnderlineOffset: "0.1rem",
         borderRadius: "1rem",
         cursor: "pointer",
-        zIndex: 2,
+
         color: color.textColor,
         backgroundColor: color.color,
         transition: "background-color 0.2s, color 0.2s",
