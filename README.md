@@ -1,9 +1,35 @@
 # Django Model Gallery
 
-## TODO:
+## 프로젝트 사용법
 
-- useViz에 유효하지 않은 값이 들어갔을때 이전 그래프를 유지하면서 경고 스테이터스 띄우기
-- 주석 달기
+### 설치 방법
+
+```bash
+git clone [repo-url] [appname]
+cd [appname]
+npm install
+```
+
+- env.local.example 파일을 프로젝트의 root 경로에 복사합니다.
+- 이름을 env.local로 바꿉니다.
+
+- 내용은 수정하지 마세요.
+
+### 실행 방법
+
+```bash
+npm run dev
+```
+
+### 주의 사항
+- 로컬 환경에서는 잘 작동하는데 배포 환경에서 오류가 날 수도 있습니다.
+- `push`하기 전에 꼭 이 명령어를 실행하고 오류가 없는지 확인하세요.
+
+```bash
+npm run build
+```
+
+## 기술스택 
 
 ### framework
 
@@ -18,21 +44,19 @@
 
 - tailwindCSS
 - daisyUI
+- React-Select
 
-## 프로젝트 사용법
+### Markdown
 
-### 실행 방법
+- MarkdownIt
 
-```bash
-git clone [repo-url] [appname]
-cd [appname]
-npm install
+### ERD Graph
+
+- Viz.js
+- D3
 
 
-npm run dev
-```
-
-### Constants
+## Constants
 
 이 프로젝트에서는 여러 가지 설정과 상수를 사용하여 컨텐츠를 정의할 수 있습니다. 현재는 프로젝트의 미디어 쿼리 브레이크포인트, 네비게이션 바 항목, 카테고리 등을 커스텀합니다.
 
